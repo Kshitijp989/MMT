@@ -1,1 +1,3 @@
-console.log('abc12');
+const start = require("./server");
+
+start();
