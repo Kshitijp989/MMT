@@ -7,29 +7,29 @@ const config = require('../config/config');
 
 // Register a new user
 exports.register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     try {
-        console.log("here")
         let user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
-     
-        user = new User({ name, email, password });
-
-        // Encrypt password
+        user = new User({ name, email, password, role });
+console.log(user);
+       
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
 
-        // Save user to database
+      
         await user.save();
 
-        // Generate JWT token
+       
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                
+                role: user.role
             }
         };
 
@@ -43,27 +43,29 @@ exports.register = async (req, res) => {
     }
 };
 
-// Login a user
+
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Check if user exists
+      
         let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
-        // Verify password
+     
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
-        // Generate JWT token
+       
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                name:user.name,
+                role: user.role
             }
         };
 
