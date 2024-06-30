@@ -20,7 +20,7 @@ const {apiBaseUrl}=useContext(Statecontext);
       const url=`${apiBaseUrl}admin/flights`
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MTk3NzEyNzIsImV4cCI6MTcxOTc3NDg3Mn0.q_d_LzBmTWQTpRkZgBxednzkpCYWogObpSwPjLV2fOU'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MTk3NzUzNzUsImV4cCI6MTcxOTc3ODk3NX0.OiwVPSVYQbTrdxn7-umfFZHeN8SfNYaFboYmpcSCoCo'
         }
       });
       setFlights(response.data);
