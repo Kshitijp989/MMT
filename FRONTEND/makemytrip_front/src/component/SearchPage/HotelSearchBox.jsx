@@ -56,7 +56,7 @@ const Style = styled.div`
       }
       .second {
         width: 170px;
-        line-height: 0;
+        //line-height: 0;
         background: rgba(104, 105, 104, 0.3);
         border-radius: 5px;
         p {

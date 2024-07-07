@@ -31,7 +31,7 @@ const AddFlightForm = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked,select } = e.target;
+    const { name, value, type, checked } = e.target;
     setFlight({
       ...flight,
        [name]: type === 'checkbox' ? checked : value
@@ -49,7 +49,7 @@ const AddFlightForm = () => {
           'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
         }
       });
-      navigate('/');
+      navigate('/admin/flight');
     } catch (error) {
       console.error('Error adding flight:', error);
     }
@@ -177,7 +177,7 @@ const AddFlightForm = () => {
               name="stops"
               value={flight.stops}
               onChange={handleChange}
-              
+              required
               />
           </Form.Group>
           

@@ -15,18 +15,18 @@ const Style = styled.div`
     background-color: #03032c;
     .topdiv {
     width: 90%;
-    height: 60px;
+    height: 100px;
     padding-bottom: 10px;
     margin: auto;
     display: flex;
     justify-content: space-around;
-    padding-top: 8px;
+    padding-top: 10px;
     align-items: center;
     .first {
       width: 120px;
       padding: 0;
       margin: 0;
-      line-height: 0px;
+     // line-height: 0px;
       text-align: center;
       background: rgba(104, 105, 104, 0.3);
       border-radius: 5px;
@@ -53,9 +53,11 @@ const Style = styled.div`
     }
     .second {
       width: 170px;
-      line-height: 0;
+      //line-height: 0;
       background: rgba(104, 105, 104, 0.3);
       border-radius: 5px;
+      
+      
       p {
         font-size: 14px;
         font-weight: 600;
@@ -101,11 +103,11 @@ const Style = styled.div`
     top: 0;
     /* user-select: none; */
 }
-    .date{
+.date{
     border:none;
     font-size: 16px;
     margin-left: 10px;
-    -webkit-appearance: ;
+    color: white
 }
 `;
 
@@ -187,7 +189,7 @@ export const SearchBox = ({handle}) => {
         <div className="second">
           <p>Depart</p>
           <input  name="DepartDate" type="date" id="DepartDate" className="date" 
-          value={select.ReturnDate}
+          value={select.DepartDate}
            onChange={handleSelect}
            style={{
              border: "none",
@@ -199,7 +201,7 @@ export const SearchBox = ({handle}) => {
         </div>
         <div className="second">
           <p>Return</p>
-          <input name="ReturnDate" type="date" id="returndate" className="date" 
+          <input name="ReturnDate" type="date" id="returndate" //className="date" 
           onChange={handleSelect} value={select.ReturnDate}
           style={{
             border: "none",
