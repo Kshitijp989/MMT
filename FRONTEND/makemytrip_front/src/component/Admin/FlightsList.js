@@ -5,8 +5,10 @@ import NavBar from '../NavBar';
 import backgroundImage from '../../Assets/flight.jpg';
 import './FlightsList.css';
 import Statecontext from '../Context/Statecontext';
+import { useNavigate } from "react-router-dom";
 
 const FlightsList = () => {
+  const navigate = useNavigate();
   const [flights, setFlights] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(100);
@@ -18,14 +20,29 @@ const {apiBaseUrl}=useContext(Statecontext);
   const fetchFlights = async () => {
     try {
       const url=`${apiBaseUrl}admin/flights`
+      console.log(url,"here it is")
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MTk3NzUzNzUsImV4cCI6MTcxOTc3ODk3NX0.OiwVPSVYQbTrdxn7-umfFZHeN8SfNYaFboYmpcSCoCo'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MjAzNTAzNDMsImV4cCI6MTcyMDM1Mzk0M30.Q6JB3SQSO96ihbHvRnvOz9wOHqEBsGRjqJCsOXZUL-4'
         }
       });
       setFlights(response.data);
     } catch (error) {
       console.error('Error fetching flights:', error);
+    }
+  };
+
+  const deleteFlight = async (flightId) => {
+    try {
+      const url = `${apiBaseUrl}admin/flights/${flightId}`;
+      await axios.delete(url, {
+        headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MjAzNDkzMTIsImV4cCI6MTcyMDM1MjkxMn0.t99Tfm6Z0S9gZ3QA4A9yYXmv7tYkke5WHIL88YBtBko'
+        }
+      });
+      setFlights(flights.filter(flight => flight._id !== flightId));
+    } catch (error) {
+      console.error('Error deleting flight:', error);
     }
   };
 
@@ -37,23 +54,37 @@ const {apiBaseUrl}=useContext(Statecontext);
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
   return (
     <div style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),url(${backgroundImage})`, backgroundSize: 'cover', minHeight: '100vh' }}>
       <NavBar />
       <div className="container mt-5">
         <h2 className="text-center mb-4">Flights List</h2>
+        <div className="d-flex justify-content-end mb-3">
+      <Button variant="primary" onClick={() => navigate("/add-flight")}>Add New Flight</Button>  {/* New button */}
+    </div>
         <div className="table-responsive">
           <Table striped bordered hover>
             <thead className="thead-fixed">
               <tr className="table-success">
                 <th>#</th>
                 <th>Flight Number</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
-                <th>Price</th>
-                <th>Actions</th>
+      <th>Departure</th>
+      <th>Arrival</th>
+      <th>Departure Time</th>
+      <th>Arrival Time</th>
+      <th>Price</th>
+      <th>One-Way Price</th>
+      <th>One-Way Economy</th>
+      <th>One-Way Premium</th>
+      <th>Stops</th>
+      <th>Stop Locations</th>
+      <th>Refundable Fares</th>
+      <th>City</th>
+      <th>Airport Code</th>
+      <th>Airport Name</th>
+      <th>Class</th>
+      <th>Actions</th>
               </tr>
             </thead>
             <tbody className="tbody-scroll">
@@ -61,14 +92,36 @@ const {apiBaseUrl}=useContext(Statecontext);
                 <tr className="table-warning" key={flight._id} style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
                   <td>{index + 1}</td>
                   <td>{flight.flightNumber}</td>
-                  <td>{flight.departure}</td>
-                  <td>{flight.arrival}</td>
-                  <td>{new Date(flight.departureTime).toLocaleString()}</td>
-                  <td>{new Date(flight.arrivalTime).toLocaleString()}</td>
-                  <td>${flight.price}</td>
+        <td>{flight.departure}</td>
+        <td>{flight.arrival}</td>
+        <td>{new Date(flight.departureTime).toLocaleString()}</td>
+        <td>{new Date(flight.arrivalTime).toLocaleString()}</td>
+        <td>${flight.price}</td>
+        <td>${flight.oneWayPrice}</td>
+        <td>${flight.oneWayPriceEconomy}</td>
+        <td>${flight.oneWayPricePremium}</td>
+        <td>{flight.stops}</td>
+        <td>
+          {flight.stopLocations.length > 0 ? (
+            flight.stopLocations.map((stop, i) => (
+              <span key={i}>
+                {stop}
+                {i < flight.stopLocations.length - 1 && ', '}
+              </span>
+            ))
+          ) : (
+            'NA'
+          )}
+        </td>
+        <td>{flight.refundableFares ? 'Yes' : 'No'}</td>
+        <td>{flight.cityName}</td>
+        <td>{flight.airportCode}</td>
+        <td>{flight.airportName}</td>
+        <td>{flight.class}</td>
+       
                   <td>
                     <Button variant="warning" className="me-2">Edit</Button>
-                    <Button variant="danger">Delete</Button>
+                    <Button variant="danger" onClick={() => deleteFlight(flight._id)}>Delete</Button>
                   </td>
                 </tr>
               ))}

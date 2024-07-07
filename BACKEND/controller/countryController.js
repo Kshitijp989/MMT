@@ -1,5 +1,5 @@
 const countries = require('../utile/countries');
-
+const countriesWithAirports = require('../utile/CountryCities');
 const getCountries = (req, res) => {
     console.log("here")
   res.json(countries.map(country => country.country));
@@ -14,7 +14,19 @@ const getCountryCities = (req, res) => {
 
     res.json(country.cities);
 };
+const getCitiesWithAirports = (req, res) => {
+  const citiesWithAirports = countriesWithAirports.flatMap(country => 
+      country.cities.map(city => ({
+          cityName: city.cityName,
+          airportCode: city.airportCode,
+          airportName: city.airportName
+      }))
+  );
+  res.json(citiesWithAirports);
+};
+
 module.exports = {
   getCountries,
   getCountryCities,
+  getCitiesWithAirports,
 };

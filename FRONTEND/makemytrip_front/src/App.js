@@ -7,28 +7,32 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Statecontext from './component/Context/Statecontext'
 import { Main } from './component/HomePage/Main';
 import { Search } from './component/SearchPage/Search';
+import FlightsList from './component/Admin/FlightsList';
+import AddFlightForm from './component/Admin/AddFlightForm';
 
 function App() {
   let apiBaseUrl='http://localhost:5000/api/';
   return (
     <div className="App">
-{/*    
+   
     <Statecontext.Provider
     value={{
       apiBaseUrl
     }}
     >
-      <RouterProvider router={router}/>
-      </Statecontext.Provider> */}
+      {/* <RouterProvider router={router}/> */}
+     
          <BrowserRouter>
         <div>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/Search" element={<Search />} />
-
+            <Route path="/admin/flight" element={<FlightsList/>}/>
+            <Route path="/add-flight" element={<AddFlightForm />} /> 
           </Routes>
         </div>
       </BrowserRouter>
+      </Statecontext.Provider> 
     </div>
   );
 }
