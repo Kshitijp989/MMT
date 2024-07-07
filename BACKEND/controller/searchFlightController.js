@@ -56,8 +56,8 @@ exports.searchFlights = async (req, res) => {
 };
 
 exports.searchFlightsByPrice = async (req, res) => {
-    const { from, to, departureDate, returnDate, flightClass, sortByPrice ,refundableFares,airlines} = req.query;
-  
+    const { from, to, departureDate, returnDate, flightClass, sortByPrice ,refundableFares,airlines} = req.body;
+  console.log(req.body,"here")
     // Build the query object for outbound flights
     let query = {
       departure: from,
@@ -72,7 +72,7 @@ exports.searchFlightsByPrice = async (req, res) => {
       query.class = flightClass;
     }
   
-    console.log('Outbound flight query:', query);
+   
   
     let flights = [];
   
@@ -96,7 +96,7 @@ exports.searchFlightsByPrice = async (req, res) => {
           returnQuery.class = flightClass;
         }
   
-        console.log('Return flight query:', returnQuery);
+     
   
         const returnFlights = await Flight.find(returnQuery);
         flights = flights.concat(returnFlights); 
@@ -112,9 +112,9 @@ exports.searchFlightsByPrice = async (req, res) => {
       if (refundableFares) {
         flights = flights.filter(flight => flight.refundableFares === true);
       }
-      if (airlines) {
-       
-        flights = flights.filter(flight => flight.airlines.toLowerCase() === airlines.toLowerCase()); 
+      if (airlines && Array.isArray(airlines) && airlines.length > 0) {
+        // Filter flights based on airlines array
+        flights = flights.filter(flight => airlines.some(airline => flight.airlines.toLowerCase() === airline.toLowerCase()));
       }
  
       res.json(flights);

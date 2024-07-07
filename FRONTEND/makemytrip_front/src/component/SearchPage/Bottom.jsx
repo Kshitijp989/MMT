@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Style = styled.div`
   display: grid;
@@ -176,9 +176,10 @@ const Style = styled.div`
     }
   }
 `;
-export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
+export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAirlines}) => {
   const [value, setValue] = useState("");
-  const [refundable, setRefundable] = useState(false);
+  const [refundable, setRefundable] = useState(true);
+  const [checkedItems, setCheckedItems] = useState([]);
   const handleSlider = (e) => {
     setValue(e.target.value);
   };
@@ -188,8 +189,34 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
   const handleHigh = (e)=>{
     sorthigh(e.target.checked)
   }
+
+
+  const handleChangeCheckBox = (e) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+     
+      setCheckedItems(prevItems => [...prevItems, value]); // Using callback for setCheckedItems
+
+    } else {
+     
+      setCheckedItems(prevItems => prevItems.filter(item => item !== value)); // Using callback for setCheckedItems
+    }
+  };
+
+  // Logging the updated state after state update
+  useEffect(() => {
+    console.log("Updated Checked Items:", checkedItems);
+    handleAirlines(checkedItems);
+  }, [checkedItems]);
+ 
   const handleChangeRefundable = (e) => {
-    setRefundable(e.target.checked);
+    setRefundable(!refundable);
+    if(refundable===true){
+    handleRefund(refundable)}
+    else{
+      handleRefund(false)
+    }
     console.log(refundable,"check refund")
   };
 
@@ -202,17 +229,19 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   };
+
+ 
   return (
     <Style>
       <div className="filters">
         <div className="firstFilter">
           <h3>Sort by price</h3>
           <div className="div">
-            <input onChange={handleSort} type="checkbox" />
+            <input onChange={handleSort} type="radio" name="sort"/>
             <p>Low to High</p>
           </div>
           <div className="div">
-            <input onChange={handleHigh} type="checkbox" />
+            <input onChange={handleHigh} type="radio" name="sort"/>
             <p>High to Low</p>
           </div>
         </div>
@@ -232,27 +261,28 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
           </div>
         </div>
         <div className="firstFilter">
-          <h3>Alliances & Airlines</h3>
-          <div className="div">
-            <input type="checkbox" />
-            <p>Air India</p>
-          </div>
-          <div className="div">
-            <input type="checkbox" />
-            <p>British Airways</p>
-          </div>
-          <div className="div">
-            <input type="checkbox" />
-            <p>Lufthansa</p>
-          </div>
-        </div>
-        <div className="firstFilter">
+  <h3>Alliances & Airlines</h3>
+  <div className="div">
+    <input type="checkbox" value="Japan Airlines" onChange={handleChangeCheckBox} />
+    <p>Japan Airlines</p>
+  </div>
+  <div className="div">
+    <input type="checkbox" value="IndiGo" onChange={handleChangeCheckBox} />
+    <p>IndiGo</p>
+  </div>
+  <div className="div">
+    <input type="checkbox" value="American Airlines" onChange={handleChangeCheckBox} />
+    <p>American Airlines</p>
+  </div>
+</div>
+
+        {/* <div className="firstFilter">
           <h3>Layover Airports</h3>
           <div className="div">
             <input type="checkbox" />
             <p>Frankfurt</p>
           </div>
-        </div>
+        </div> */}
         <div className="firstFilter">
           <h3>Select Range ₹{value}</h3>
           <input type="range" min="1000" max="10000" onChange={handleSlider} />

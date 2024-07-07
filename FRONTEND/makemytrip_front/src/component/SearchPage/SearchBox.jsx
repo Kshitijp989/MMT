@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Statecontext from '../Context/Statecontext';
 
 const Style = styled.div`
-  height: 250px;
+ height: 250px;
   background: linear-gradient(
     to top,
     #030779 0%,
@@ -14,44 +14,23 @@ const Style = styled.div`
     #03043d 50%,
     #020420 100%
   );
-
   .jelo {
     width: 100%;
     background-color: #03032c;
     .topdiv {
-
-    width: 90%;
-    height: 100px;
-    padding-bottom: 10px;
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
-    padding-top: 10px;
-    align-items: center;
-    .first {
-      width: 120px;
-      padding: 0;
-      margin: 0;
-     // line-height: 0px;
-      text-align: center;
-      background: rgba(104, 105, 104, 0.3);
-      border-radius: 5px;
-      p {
-        font-size: 14px;
-        font-weight: 600;
-        color: #2c98f1;
-      }
-      select {
-        border: 0px;
-        -webkit-appearance: ;
-        -moz-appearance: none;
-        text-indent: 1px;
-        color: white;
-        font-size: 17px;
-        text-overflow: "";
-        outline: 0px;
-        width: 100%;
-
+      width: 90%;
+      height: 100px;
+      padding-bottom: 10px;
+      margin: auto;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 8px;
+      align-items: center;
+      .first {
+        width: 120px;
+        padding: 0;
+        margin: 0;
+        line-height: 0px;
         text-align: center;
         background: rgba(104, 105, 104, 0.3);
         border-radius: 5px;
@@ -62,7 +41,7 @@ const Style = styled.div`
         }
         select {
           border: 0px;
-          -webkit-appearance: none;
+          //-webkit-appearance: none;
           -moz-appearance: none;
           text-indent: 1px;
           color: white;
@@ -78,45 +57,74 @@ const Style = styled.div`
           background-color: #7e7e7e;
         }
       }
-      option{background-color: #7e7e7e}
-    }
-    .second {
-      width: 170px;
-      //line-height: 0;
-      background: rgba(104, 105, 104, 0.3);
-      border-radius: 5px;
-      
-      
-      p {
-        font-size: 14px;
-        font-weight: 600;
-        margin-left: 10px;
-        color: #2c98f1;
+      .second {
+        width: 170px;
+        //line-height: 0;
+        background: rgba(104, 105, 104, 0.3);
+        border-radius: 5px;
+        p {
+          font-size: 14px;
+          font-weight: 600;
+          margin-left: 10px;
+          color: #2c98f1;
+        }
+        select {
+          border: 0px;
+          //-webkit-appearance: none;
+          -moz-appearance: none;
+          text-indent: 8px;
+          color: white;
+          font-size: 17px;
+          text-overflow: "";
+          outline: 0px;
+          width: 100%;
+          background-color: #21233e ;
+          padding: 3px;
+        }
+        option {
+          background-color: #494949;
+        }
       }
-      select {
-        border: 0px;
-        -webkit-appearance: ;
-        -moz-appearance: ;
-        text-indent: 8px;
-
+      button {
+        width: 170px;
+        height: 45px;
+        border-radius: 25px;
+        background: linear-gradient(
+          to right,
+          #8f92fa 0%,
+          #6165f0 50%,
+          #6c70eb 50%,
+          #3339e9 100%
+        );
+        border: none;
         color: white;
         font-weight: 700;
         font-size: 20px;
       }
     }
   }
-
   .hello {
     position: fixed;
     z-index: 100;
     top: 0;
-    /* user-select: none; */
+  }
+    .fromtodiv {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    height: 87%;
+       p {
+          font-size: 14px;
+          font-weight: 600;
+          margin-left: 10px;
+          color: #2c98f1;
+        }
 }
-.date{
+    .date{
     border:none;
     font-size: 16px;
     margin-left: 10px;
-    color: white
+    color: white;
+    background-color: transparent;
 }
 `;
 
@@ -172,6 +180,7 @@ export const SearchBox = ({ handle }) => {
   }, [apiBaseUrl]);
 
   const handleButton = () => {
+console.log("get Value Over here",select)
     handle(select);
   };
 
@@ -198,7 +207,7 @@ export const SearchBox = ({ handle }) => {
           </div>
           <div className="second">
             <p>From</p>
-            {console.log(select.from,"value check")}
+          
             <select onChange={handleSelect} name="from" id="from" value={select.from}>
               {text.map((e) => (
                 <option value={e.cityName} key={e.cityName}>
@@ -209,7 +218,7 @@ export const SearchBox = ({ handle }) => {
           </div>
           <div className="second">
             <p>To</p>
-            {console.log(select.to,"value to check")}
+          
             <select onChange={handleSelect} name="to" id="to" value={select.to}>
               {text.map((e) => (
                 <option value={e.cityName} key={e.cityName}>
@@ -256,10 +265,11 @@ export const SearchBox = ({ handle }) => {
           </div>
           <div className="second">
             <p>Traveller and Class</p>
+          
             <select onChange={handleSelect} name="TravellerClass" id="TravellerClass" value={select.TravellerClass}>
-              <option value="">Select</option>
-              <option value="1">Economy</option>
-              <option value="2">Premium</option>
+              {/* <option value="">Select</option> */}
+              <option value="Economy">Economy</option>
+              <option value="Premium">Premium</option>
             </select>
           </div>
           <button onClick={handleButton}>SEARCH</button>
