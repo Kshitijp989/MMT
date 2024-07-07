@@ -13,7 +13,10 @@ exports.createFlight = async (req, res) => {
 
 exports.getFlights = async (req, res) => {
     try {
+
         const flights = await Flight.find(); 
+        res.send(flights);
+
     } catch (error) {
         res.status(500).send(error.message);
     }

@@ -36,7 +36,7 @@ const Style = styled.div`
       }
       select {
         border: 0px;
-        -webkit-appearance: none;
+        -webkit-appearance: ;
         -moz-appearance: none;
         text-indent: 1px;
         color: white;
@@ -63,7 +63,7 @@ const Style = styled.div`
       }
       select {
         border: 0px;
-        -webkit-appearance: none;
+        -webkit-appearance: ;
         -moz-appearance: none;
         text-indent: 8px;
         color: white;
@@ -100,12 +100,22 @@ const Style = styled.div`
     top: 0;
     /* user-select: none; */
 }
+    .date{
+    border:none;
+    font-size: 16px;
+    margin-left: 10px;
+    -webkit-appearance: ;
+}
 `;
 
 export const SearchBox = ({handle}) => {
   const [select,setSelect] = useState({
     from: "",
-    to: ""
+    to: "",
+    TravellerClass:"",
+    trip:"",
+    DepartDate:"",
+    ReturnDate:""
   })
   const [text, setText] = useState([]);
   const handleSelect = (e)=>{
@@ -119,10 +129,10 @@ export const SearchBox = ({handle}) => {
   useEffect(() => {
     let promise = async () => {
       const data = await fetch(
-        "https://raw.githubusercontent.com/ashhadulislam/JSON-Airports-India/master/airports.json"
+        "http://localhost:5000/api/getallcountry/countries/cities"
       );
       const ans = await data.json();
-      setText(ans.airports);
+      setText(ans);
     };
     promise();
   }, []);
@@ -145,47 +155,63 @@ export const SearchBox = ({handle}) => {
         <div className={ nav === true ? "hello jelo" : "jelo" }>
       <div className="topdiv">
         <div className="first">
-          <p>Trip from</p>
-          <select name="trip" id="">
+          <p>Trip Type</p>
+          <select name="trip" id="trip" onChange={handleSelect}>
+          <option value="">Select</option>
             <option value="one way">Oneway</option>
           </select>
         </div>
         <div className="second">
           <p>From</p>
-          <select onChange={handleSelect} name="from" id="">
+          <select onChange={handleSelect} name="from" id="from">
           {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}>
-                {e.city_name}
+              <option value={e.airportCode} key={e.cityName}>
+                {e.cityName}
               </option>
             ))}
           </select>
         </div>
         <div className="second">
           <p>To</p>
-          <select onChange={handleSelect} name="to" id="">
+          <select onChange={handleSelect} name="to" id="to">
           {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}>
-                {e.city_name}
+              <option value={e.airportCode} key={e.cityName}>
+                {e.cityName}
               </option>
             ))}
           </select>
         </div>
         <div className="second">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
-          </select>
+          <p>Depart</p>
+          <input  name="DepartDate" type="date" id="DepartDate" className="date" 
+          value={select.ReturnDate}
+           onChange={handleSelect}
+           style={{
+             border: "none",
+             backgroundColor: "transparent",
+             color: "white",
+             fontSize: "17px",
+             padding: "3px"
+           }}/>
         </div>
         <div className="second">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
-          </select>
+          <p>Return</p>
+          <input name="ReturnDate" type="date" id="returndate" className="date" 
+          onChange={handleSelect} value={select.ReturnDate}
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            color: "white",
+            fontSize: "17px",
+            padding: "3px"
+          }}/>
         </div>
         <div className="second">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
+          <p>Traveller and Class</p>
+          <select onChange={handleSelect} name="TravellerClass" id="TravellerClass">
+            <option value="">Select</option>
+            <option value="1">Economy</option>
+            <option value="2">Premium</option>
           </select>
         </div>
         <button onClick={()=>{

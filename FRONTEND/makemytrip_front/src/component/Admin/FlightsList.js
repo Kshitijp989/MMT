@@ -23,7 +23,7 @@ const {apiBaseUrl}=useContext(Statecontext);
       console.log(url,"here it is")
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4OTAxY2I1M2I3ZTYxZjM3NGRiZGQ2Iiwicm9sZSI6InVzZXIifSwiaWF0IjoxNzIwMjU0OTIzLCJleHAiOjE3MjAyNTg1MjN9.Cv-GEI_s5jTXkDfckG4kjKrE7Mg6NAtkHXUn8iWF2Pk'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM1MjU1NCwiZXhwIjoxNzIwMzU2MTU0fQ.XfyiNfcR2-3niBfT69LRPfHJ5aNmzSjr9ZCj3H8SYcU'
 
         }
       });
