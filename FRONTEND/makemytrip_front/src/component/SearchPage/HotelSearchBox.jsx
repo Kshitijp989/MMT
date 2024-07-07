@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useContext,useState, useEffect } from "react";
 import styled from "styled-components";
+import Statecontext from '../Context/Statecontext';
 
 const Style = styled.div`
   height: 250px;
@@ -125,12 +126,12 @@ const Style = styled.div`
 `;
 
 export const HotelSearchBox = ({ handle }) => {
-
+  const {apiBaseUrl}=useContext(Statecontext);
     const [text, setText] = useState([]);
     useEffect(() => {
       let promise = async () => {
         const data = await fetch(
-          "http://localhost:5000/api/getallcountry/countries/cities"
+          `${apiBaseUrl}getallcountry/countries/cities`
         );
         const ans = await data.json();
         setText(ans);

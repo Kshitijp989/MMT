@@ -23,7 +23,7 @@ const {apiBaseUrl}=useContext(Statecontext);
       console.log(url,"here it is")
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM1MjU1NCwiZXhwIjoxNzIwMzU2MTU0fQ.XfyiNfcR2-3niBfT69LRPfHJ5aNmzSjr9ZCj3H8SYcU'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
 
         }
       });
@@ -38,7 +38,7 @@ const {apiBaseUrl}=useContext(Statecontext);
       const url = `${apiBaseUrl}admin/flights/${flightId}`;
       await axios.delete(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MjAzNDkzMTIsImV4cCI6MTcyMDM1MjkxMn0.t99Tfm6Z0S9gZ3QA4A9yYXmv7tYkke5WHIL88YBtBko'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
         }
       });
       setFlights(flights.filter(flight => flight._id !== flightId));

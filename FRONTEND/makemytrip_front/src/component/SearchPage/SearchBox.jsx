@@ -1,5 +1,6 @@
-import { useState ,useEffect } from "react";
+import { useContext,useState ,useEffect } from "react";
 import styled from "styled-components";
+import Statecontext from '../Context/Statecontext';
 const Style = styled.div`
   height: 250px;
   background: linear-gradient(
@@ -64,7 +65,7 @@ const Style = styled.div`
       select {
         border: 0px;
         -webkit-appearance: ;
-        -moz-appearance: none;
+        -moz-appearance: ;
         text-indent: 8px;
         color: white;
         font-size: 17px;
@@ -109,6 +110,7 @@ const Style = styled.div`
 `;
 
 export const SearchBox = ({handle}) => {
+  const {apiBaseUrl}=useContext(Statecontext);
   const [select,setSelect] = useState({
     from: "",
     to: "",
@@ -127,9 +129,10 @@ export const SearchBox = ({handle}) => {
   }
 
   useEffect(() => {
+   
     let promise = async () => {
       const data = await fetch(
-        "http://localhost:5000/api/getallcountry/countries/cities"
+         `${apiBaseUrl}getallcountry/countries/cities`
       );
       const ans = await data.json();
       setText(ans);

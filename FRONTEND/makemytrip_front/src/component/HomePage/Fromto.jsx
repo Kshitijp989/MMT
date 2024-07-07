@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext,useEffect, useState } from "react";
 import { Fromtocss } from "./Fromtocss";
+import Statecontext from '../Context/Statecontext';
 
 export const Fromto = ({handleChange}) => {
+  const {apiBaseUrl}=useContext(Statecontext);
   const [text, setText] = useState([]);
   useEffect(() => {
     let promise = async () => {
       const data = await fetch(
-        "http://localhost:5000/api/getallcountry/countries/cities"
+        `${apiBaseUrl}getallcountry/countries/cities`
       );
       const ans = await data.json();
       setText(ans);

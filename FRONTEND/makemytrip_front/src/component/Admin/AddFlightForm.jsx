@@ -26,24 +26,27 @@ const AddFlightForm = () => {
     cityName: '',
     airportCode: '',
     airportName: '',
-    class: ''
+    class: '',
+    isDelete:false
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked,select } = e.target;
     setFlight({
       ...flight,
-      [name]: type === 'checkbox' ? checked : value
+       [name]: type === 'checkbox' ? checked : value
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(flight)
       const url = `${apiBaseUrl}admin/flights`;
       await axios.post(url, flight, {
+        method:"POST",
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM1MjU1NCwiZXhwIjoxNzIwMzU2MTU0fQ.XfyiNfcR2-3niBfT69LRPfHJ5aNmzSjr9ZCj3H8SYcU'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
         }
       });
       navigate('/');
@@ -174,11 +177,96 @@ const AddFlightForm = () => {
               name="stops"
               value={flight.stops}
               onChange={handleChange}
-              required
+              
               />
           </Form.Group>
+          
+          <Form.Group controlId="formStopLocation" class="col-md-4">
+            <Form.Label>Stop Location</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Stop Location"
+              name="stopLocations"
+              value={flight.stopLocations}
+              onChange={handleChange}
+              
+              />
+          </Form.Group>
+          <Form.Group controlId="formRefundableFare" class="col-md-4">
+            <Form.Label>Refundable</Form.Label>
+            <Form.Check
+              type="checkbox"
+              name="refundableFares"
+              value={flight.refundableFares}
+              onChange={handleChange}
+              class="form-checkbox"
+              />
+          </Form.Group>
+          <Form.Group controlId="formairlines" class="col-md-4">
+            <Form.Label>AirLines</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter AirLines"
+              name="airlines"
+              value={flight.airlines}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
+               <Form.Group controlId="formcityName" class="col-md-4">
+            <Form.Label>City</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter City"
+              name="cityName"
+              value={flight.cityName}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
+               <Form.Group controlId="formAirportCode" class="col-md-4">
+            <Form.Label>Airport Code</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Airport Code"
+              name="airportCode"
+              value={flight.airportCode}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
+               <Form.Group controlId="formAirportName" class="col-md-4">
+            <Form.Label>Airport Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Airport Name"
+              name="airportName"
+              value={flight.airportName}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
+               <Form.Group controlId="formClass" class="col-md-4">
+            <Form.Label>Class</Form.Label>
+            <Form.Select
+            
+              type="select"
+              placeholder="Select Class"
+              name="class"
+              value={flight.class}
+              onChange={handleChange}
+              
+              >
+                <option value="">Select Class</option>
+                <option value="Economy">Economy Class</option>
+                <option value="Premium">Premium Class</option>
+                </Form.Select>
+               </Form.Group>
           </div>
           </div>
+          <Form.Group>
+          <Button type="submit" class='button-primary' onclick="handleSubmit">Add Flight</Button>
+          </Form.Group>
 </Form>
 </Container>
 </div>
