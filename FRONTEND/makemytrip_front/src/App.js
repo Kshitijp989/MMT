@@ -10,6 +10,7 @@ import FlightsList from './component/Admin/FlightsList';
 import { UnderConstruction } from './component/SearchPage/Underconstruction';
 import { HotelSearch } from './component/SearchPage/HotelSearch';
 import AddFlightForm from './component/Admin/AddFlightForm';
+import HotelsList from './component/Admin/HotelsList';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="/Activities" element={<UnderConstruction />} />
             <Route path="/Admin/FlightList" element={<FlightsList />} />
             <Route path="/admin/flight" element={<FlightsList/>}/>
+            <Route path="/admin/hotel" element={<HotelsList/>}/>
             <Route path="/add-flight" element={<AddFlightForm />} />
 
           </Routes>

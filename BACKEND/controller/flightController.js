@@ -13,8 +13,7 @@ exports.createFlight = async (req, res) => {
 
 exports.getFlights = async (req, res) => {
     try {
-        const flights = await Flight.find({ isDeleted: false }); // Fetch flights where isDeleted is false
-        res.send(flights);
+        const flights = await Flight.find(); 
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -51,7 +50,7 @@ exports.getFlightById = async (req, res) => {
 };
 exports.deleteFlight = async (req, res) => {
     try {
-        const flight = await Flight.findByIdAndUpdate(req.params.id, { isDelete: true }, { new: true });
+        const flight = await Flight.findByIdAndDelete(req.params.id);
         if (!flight) return res.status(404).send('Flight not found.');
         res.send(flight);
     } catch (error) {

@@ -20,7 +20,7 @@ const HotelsList = () => {
        const url=`${apiBaseUrl}admin/hotels`
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MTk3NzUzNzUsImV4cCI6MTcxOTc3ODk3NX0.OiwVPSVYQbTrdxn7-umfFZHeN8SfNYaFboYmpcSCoCo'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MjAzNjE1NjMsImV4cCI6MTcyMDM2NTE2M30.2YZqJJsD-jZhhgRka4XxZo9MN6scZ3gqKVxWfwSfUYU'
         }
       });
       setHotels(response.data);
