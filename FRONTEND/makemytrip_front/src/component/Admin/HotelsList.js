@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pagination, Table, Button } from 'react-bootstrap';
 import NavBar from '../NavBar';
-import backgroundImage from '../../Assets/flight.jpg';
+import backgroundImage from '../../Assets/Hotel.jpg';
 import './HotelList.css';
 import Statecontext from '../Context/Statecontext';
+import { useNavigate } from "react-router-dom";
 
 const HotelsList = () => {
+  const navigate = useNavigate();
   const [hotels, setHotels] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(100);
@@ -42,6 +44,7 @@ const HotelsList = () => {
       <NavBar />
       <div className="container mt-5">
         <h2 className="text-center mb-4">Hotels List</h2>
+        <Button variant="primary" onClick={() => navigate("/add-Hotel")}>Add New Hotel</Button>  {/* New button */}
         <div className="table-responsive">
           <Table striped bordered hover>
             <thead className="thead-fixed">

@@ -13,6 +13,7 @@ import { HotelSearch } from './component/SearchPage/HotelSearch';
 import AddFlightForm from './component/Admin/AddFlightForm';
 import HotelsList from './component/Admin/HotelsList';
 import { useState } from 'react';
+import AddHotelForm from './component/Admin/AddHotelForm';
 
 
 
@@ -55,6 +56,7 @@ function App() {
             <Route path="/admin/flight" element={<FlightsList/>}/>
             <Route path="/admin/hotel" element={<HotelsList/>}/>
             <Route path="/add-flight" element={<AddFlightForm />} />
+            <Route path="/add-hotel" element={<AddHotelForm />} />
 
           </Routes>
         </div>
