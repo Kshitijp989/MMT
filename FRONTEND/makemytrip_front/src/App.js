@@ -12,6 +12,7 @@ import { HotelSearch } from './component/SearchPage/HotelSearch';
 
 import AddFlightForm from './component/Admin/AddFlightForm';
 import HotelsList from './component/Admin/HotelsList';
+import { useState } from 'react';
 
 
 
@@ -19,12 +20,18 @@ import HotelsList from './component/Admin/HotelsList';
 
 function App() {
   let apiBaseUrl='http://localhost:5000/api/';
+ 
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [travellerClass, setTravellerClass] = useState("");
   return (
     <div className="App">
    
     <Statecontext.Provider
     value={{
-      apiBaseUrl
+      apiBaseUrl,from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass 
     }}
     >
       {/* <RouterProvider router={router}/> */}

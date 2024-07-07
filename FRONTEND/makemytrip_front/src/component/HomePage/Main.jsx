@@ -10,18 +10,24 @@ import { Bottom } from "./Bottom";
 import { Header } from "./Header";
 import { Link } from "react-router-dom";
 import { SmallBottom } from "./SmallBottom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FareTypes } from "./FareTypes";
 import { Login } from "../login/Login";
-
+import Statecontext from "../Context/Statecontext";
 
 export const Main = () => {
   const [data, setData] = useState({
     from: "",
     to: "",
   });
+  const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass,apiBaseUrl } = useContext(Statecontext);
+  useState(()=>{
+console.log(from)
+  },[from])
   const handleData = (e) => {
+    console.log(e.target.value,"here data is")
     const { name, value } = e.target;
+    console.log(name,value,"here data is")
     setData({ ...data, [name]: value });
   };
   const addLocal = () => {

@@ -178,6 +178,7 @@ const Style = styled.div`
 `;
 export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
   const [value, setValue] = useState("");
+  const [refundable, setRefundable] = useState(false);
   const handleSlider = (e) => {
     setValue(e.target.value);
   };
@@ -187,8 +188,20 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
   const handleHigh = (e)=>{
     sorthigh(e.target.checked)
   }
+  const handleChangeRefundable = (e) => {
+    setRefundable(e.target.checked);
+    console.log(refundable,"check refund")
+  };
+
   let x = localStorage.getItem("myKey");
   let y = JSON.parse(x);
+
+  const formatTime = (timeString) => {
+    const date = new Date(timeString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
   return (
     <Style>
       <div className="filters">
@@ -205,16 +218,16 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
         </div>
         <div className="firstFilter">
           <h3>Popular Filters</h3>
-          <div className="div">
+          {/* <div className="div">
             <input type="checkbox" />
             <p>stop</p>
           </div>
           <div className="div">
             <input type="checkbox" />
             <p>Late Departures</p>
-          </div>
+          </div> */}
           <div className="div">
-            <input type="checkbox" />
+            <input type="checkbox"  onChange={handleChangeRefundable} />
             <p>Refundable Fares</p>
           </div>
         </div>
@@ -250,35 +263,43 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
           Flight from {y.from} to {y.to}
         </h1>
         {data.map((e) => (
+      
           <div key={nanoid(6)} className="maping">
             <div className="div1">
               <div className="one">
                 <img
                   src={
-                    e.airline.name === "IndiGo"
+                    e.airlines === "IndiGo"
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=7"
-                      : e.airline.name === "Air India"
+                      : e.airline === "Air India"
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=7"
-                      : e.airline.name === "AirAsia"
+                      : e.airline === "AirAsia"
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/I5.png?v=7"
-                      : e.airline.name === "Vistara"
+                      : e.airline === "Vistara"
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/UK.png?v=7"
-                      : e.airline.name === "SpiceJet"
+                      : e.airline === "SpiceJet"
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=7"
-                      : e.airline.name === "GoAir"
+                      : e.airline === "GoAir"
                       ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/G8.png?v=7"
                       : "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/G8.png?v=7"
                   }
                   alt=""
                 />
-                <p>{e.airline.name}</p>
-              </div>
-              <div className="two">
-                <h5>{e.departure.scheduled.split("T")[1].split("+")[0]}</h5>
-                <p>{e.departure.iata}</p>
+                <p>{e.airline}</p>
               </div>
               <div className="three">
-                <p>
+                <h6>Departure Time</h6>
+                <h5>{formatTime(e.departureTime)}</h5>
+              
+                {/* <p>{e.departure.iata}</p> */}
+              </div>
+               <div className="three">
+               <h6>Arrival Time</h6>
+                <h5>{formatTime(e.arrivalTime)}</h5>
+              
+                {/* <p>{e.departure.iata}</p> */}
+              </div>
+              {/*  <p>
                   {+e.arrival.scheduled
                     .split("T")[1]
                     .split("+")[0]
@@ -308,12 +329,14 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh}) => {
               <div className="two">
                 <h5>{e.arrival.scheduled.split("T")[1].split("+")[0]}</h5>
                 <p>{e.arrival.iata}</p>
-              </div>
-              <h4>
-                {+e.departure.delay === 0 || null
+              </div>*/}
+              <h7>Economy {"₹"+ e.oneWayPriceEconomy}
+                {/* {+e.departure.delay === 0 || null
                   ? "₹1200"
-                  : "₹" + e.departure.delay * 200}
-              </h4>
+                  : "₹" + e.departure.delay * 200} */}
+                 
+              </h7> 
+              <h7> Premium {"₹"+e.oneWayPricePremium}</h7>
               <button
                 onClick={() => {
                   bookData(e);
