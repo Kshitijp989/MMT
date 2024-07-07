@@ -1,9 +1,12 @@
+
 import { useContext, useEffect, useState } from "react";
 import { Fromtocss } from "./Fromtocss";
 import Statecontext from "../Context/Statecontext";
 
 export const Fromto = () => {
   const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass, apiBaseUrl } = useContext(Statecontext);
+
+
   const [text, setText] = useState([]);
 useEffect(()=>{
   setFrom('');
@@ -13,8 +16,10 @@ useEffect(()=>{
 },[])
   useEffect(() => {
     let promise = async () => {
+
       const url = `${apiBaseUrl}getallcountry/countries/cities`;
       const data = await fetch(url);
+
       const ans = await data.json();
       setText(ans);
     };

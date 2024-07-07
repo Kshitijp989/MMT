@@ -1,6 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+
+
+
+import { useContext,useState ,useEffect } from "react";
 import styled from "styled-components";
-import Statecontext from "../Context/Statecontext";
+import Statecontext from '../Context/Statecontext';
 
 const Style = styled.div`
   height: 250px;
@@ -16,19 +19,39 @@ const Style = styled.div`
     width: 100%;
     background-color: #03032c;
     .topdiv {
-      width: 90%;
-      height: 60px;
-      padding-bottom: 10px;
-      margin: auto;
-      display: flex;
-      justify-content: space-around;
-      padding-top: 8px;
-      align-items: center;
-      .first {
-        width: 120px;
-        padding: 0;
-        margin: 0;
-        // line-height: 0px;
+
+    width: 90%;
+    height: 100px;
+    padding-bottom: 10px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    align-items: center;
+    .first {
+      width: 120px;
+      padding: 0;
+      margin: 0;
+     // line-height: 0px;
+      text-align: center;
+      background: rgba(104, 105, 104, 0.3);
+      border-radius: 5px;
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2c98f1;
+      }
+      select {
+        border: 0px;
+        -webkit-appearance: ;
+        -moz-appearance: none;
+        text-indent: 1px;
+        color: white;
+        font-size: 17px;
+        text-overflow: "";
+        outline: 0px;
+        width: 100%;
+
         text-align: center;
         background: rgba(104, 105, 104, 0.3);
         border-radius: 5px;
@@ -55,46 +78,27 @@ const Style = styled.div`
           background-color: #7e7e7e;
         }
       }
-      .second {
-        width: 170px;
-        // line-height: 0;
-        background: rgba(104, 105, 104, 0.3);
-        border-radius: 5px;
-        p {
-          font-size: 14px;
-          font-weight: 600;
-          margin-left: 10px;
-          color: #2c98f1;
-        }
-        select {
-          border: 0px;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          text-indent: 8px;
-          color: white;
-          font-size: 17px;
-          text-overflow: "";
-          outline: 0px;
-          width: 100%;
-          background-color: transparent;
-          padding: 3px;
-        }
-        option {
-          background-color: #494949;
-        }
+      option{background-color: #7e7e7e}
+    }
+    .second {
+      width: 170px;
+      //line-height: 0;
+      background: rgba(104, 105, 104, 0.3);
+      border-radius: 5px;
+      
+      
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 10px;
+        color: #2c98f1;
       }
-      button {
-        width: 170px;
-        height: 45px;
-        border-radius: 25px;
-        background: linear-gradient(
-          to right,
-          #8f92fa 0%,
-          #6165f0 50%,
-          #6c70eb 50%,
-          #3339e9 100%
-        );
-        border: none;
+      select {
+        border: 0px;
+        -webkit-appearance: ;
+        -moz-appearance: ;
+        text-indent: 8px;
+
         color: white;
         font-weight: 700;
         font-size: 20px;
@@ -107,14 +111,13 @@ const Style = styled.div`
     z-index: 100;
     top: 0;
     /* user-select: none; */
-  }
-
-  .date {
-    border: none;
+}
+.date{
+    border:none;
     font-size: 16px;
     margin-left: 10px;
-    -webkit-appearance: none;
-  }
+    color: white
+}
 `;
 
 export const SearchBox = ({ handle }) => {
@@ -140,6 +143,10 @@ export const SearchBox = ({ handle }) => {
     DepartDate: departureDate,
     ReturnDate: returnDate,
   });
+
+
+
+
   const [text, setText] = useState([]);
 
   const handleSelect = (e) => {
@@ -151,8 +158,13 @@ export const SearchBox = ({ handle }) => {
   };
 
   useEffect(() => {
+   
     let promise = async () => {
+
       const data = await fetch(`${apiBaseUrl}getallcountry/countries/cities`);
+
+     
+
       const ans = await data.json();
       setText(ans);
     };
@@ -252,6 +264,7 @@ export const SearchBox = ({ handle }) => {
           </div>
           <button onClick={handleButton}>SEARCH</button>
         </div>
+
       </div>
     </Style>
   );
