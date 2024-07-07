@@ -9,6 +9,8 @@ import { Search } from './component/SearchPage/Search';
 import FlightsList from './component/Admin/FlightsList';
 import { UnderConstruction } from './component/SearchPage/Underconstruction';
 import { HotelSearch } from './component/SearchPage/HotelSearch';
+import AddFlightForm from './component/Admin/AddFlightForm';
+
 
 function App() {
   let apiBaseUrl='http://localhost:5000/api/';
@@ -21,7 +23,7 @@ function App() {
     }}
     >
       {/* <RouterProvider router={router}/> */}
-    
+
          <BrowserRouter>
         <div>
           <Routes>
@@ -38,6 +40,8 @@ function App() {
             <Route path="/CahrterFlights" element={<UnderConstruction />} />
             <Route path="/Activities" element={<UnderConstruction />} />
             <Route path="/Admin/FlightList" element={<FlightsList />} />
+            <Route path="/admin/flight" element={<FlightsList/>}/>
+            <Route path="/add-flight" element={<AddFlightForm />} />
 
           </Routes>
         </div>
