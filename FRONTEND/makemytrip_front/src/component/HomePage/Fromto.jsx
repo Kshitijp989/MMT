@@ -6,10 +6,10 @@ export const Fromto = ({handleChange}) => {
   useEffect(() => {
     let promise = async () => {
       const data = await fetch(
-        "https://raw.githubusercontent.com/ashhadulislam/JSON-Airports-India/master/airports.json"
+        "http://localhost:5000/api/getallcountry/countries/cities"
       );
       const ans = await data.json();
-      setText(ans.airports);
+      setText(ans);
     };
     promise();
   }, []);
@@ -20,8 +20,8 @@ export const Fromto = ({handleChange}) => {
           <h3>FROM</h3>
           <select onChange={handleChange} name="from" id="">
             {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}>
-                {e.city_name}
+              <option value={e.airportCode} key={e.cityName}>
+                {e.cityName}
               </option>
             ))}
           </select>
@@ -30,8 +30,8 @@ export const Fromto = ({handleChange}) => {
           <h3>TO</h3>
           <select onChange={handleChange} name="to" id="">
             {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}>
-                {e.city_name}
+              <option value={e.airportCode} key={e.cityName}>
+                 {e.cityName}
               </option>
             ))}
           </select>
@@ -48,7 +48,7 @@ export const Fromto = ({handleChange}) => {
         </div>
         <div>
           <h3>TRAVLLER & CLASS</h3>
-          <select name="" id="">
+          <select name="TravellerClass" id="TravellerClass">
           <option value="">Select</option>
 
             <option value="1">Economy</option>

@@ -9,7 +9,7 @@ import { Search } from './component/SearchPage/Search';
 import FlightsList from './component/Admin/FlightsList';
 import { UnderConstruction } from './component/SearchPage/Underconstruction';
 import { HotelSearch } from './component/SearchPage/HotelSearch';
-import AddFlightForm from './component/Admin/AddFlightForm';
+import AddFlightForm from './component/Admin/AddFlightForm'
 
 
 function App() {

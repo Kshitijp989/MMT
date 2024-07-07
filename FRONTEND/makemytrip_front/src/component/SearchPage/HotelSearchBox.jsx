@@ -119,7 +119,8 @@ const Style = styled.div`
     border:none;
     font-size: 16px;
     margin-left: 10px;
-    text-color: white
+    color: white;
+    background-color: transparent;
 }
 `;
 
@@ -129,10 +130,10 @@ export const HotelSearchBox = ({ handle }) => {
     useEffect(() => {
       let promise = async () => {
         const data = await fetch(
-          "https://raw.githubusercontent.com/ashhadulislam/JSON-Airports-India/master/airports.json"
+          "http://localhost:5000/api/getallcountry/countries/cities"
         );
         const ans = await data.json();
-        setText(ans.airports);
+        setText(ans);
       };
       promise();
     }, []);
@@ -171,9 +172,9 @@ export const HotelSearchBox = ({ handle }) => {
         <div className="topdiv">
           <div className="second">
             <p>Location</p>
-            <select onChange={handleSelect} name="from" id="">
+            <select onChange={handleSelect} name="location" id="">
             {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}
+              <option value={e.airportCode} key={e.cityName}
               style={{
                 border: "none",
                 backgroundColor: "transparent",
@@ -182,24 +183,10 @@ export const HotelSearchBox = ({ handle }) => {
                 padding: "3px"
               }}
             >
-                {e.city_name}
+                {e.cityName}
               </option>
             ))}
           </select>
-            {/* <input
-              type="text"
-              name="location"
-              value={select.location}
-              onChange={handleSelect}
-              placeholder="Enter location"
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                color: "white",
-                fontSize: "17px",
-                padding: "3px"
-              }}
-            /> */}
           </div>
           <div className="second">
             <p>Check-in</p>
@@ -207,15 +194,9 @@ export const HotelSearchBox = ({ handle }) => {
               type="date"
               id="checkin"
               className="date"
+              name="checkin"
               value={select.checkin}
               onChange={handleSelect}
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                color: "white",
-                fontSize: "17px",
-                padding: "3px"
-              }}
             />
           </div>
           <div className="second">
@@ -224,15 +205,9 @@ export const HotelSearchBox = ({ handle }) => {
               type="date"
               id="checkout"
               className="date"
+              name="checkout"
               value={select.checkout}
               onChange={handleSelect}
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                color: "white",
-                fontSize: "17px",
-                padding: "3px"
-              }}
             />
           </div>
           <button onClick={handleButton}>SEARCH</button>
