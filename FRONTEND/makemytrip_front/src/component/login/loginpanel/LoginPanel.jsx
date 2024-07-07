@@ -59,7 +59,7 @@ export const LoginPanel = ({ handleClick, handleUser }) => {
 
   const checkIsUserExist=(mob)=>{
 
-    console.log(mob)
+    //console.log(mob)
     //fetch user from database using mobile number
     // let user = {
     //   name:"Rahul yadav",

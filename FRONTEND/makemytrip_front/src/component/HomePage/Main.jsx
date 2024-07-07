@@ -80,12 +80,12 @@ export const Main = () => {
           <div className="checkboxdiv">
             <div>
               {" "}
-              <input type="checkbox" />
+              <input type="checkbox" value="1"/>
               <label htmlFor="">ONEWAY</label>
-              <input type="checkbox" />
+              <input type="checkbox" value="2"/>
               <label htmlFor="">ROUNDWAY</label>
-              <input type="checkbox" />
-              <label htmlFor="">MULTI CITY</label>
+              {/* <input type="checkbox" />
+              <label htmlFor="">MULTI CITY</label> */}
             </div>
             <div>INTERNATIONAL FLIGHTS | DOMESTIC FLIGHTS</div>
           </div>

@@ -1,3 +1,5 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
@@ -80,6 +82,13 @@ export const Header = () => {
     }
   };
   window.addEventListener("scroll", handleChange);
+
+  const navigate = useNavigate();
+
+  const handleIconClick = (path) => {
+    navigate(path);
+  };
+
   return (
     <Icondivcss>
       <div className={nav ? "icondiv" : "disnone"}>
@@ -89,25 +98,25 @@ export const Header = () => {
           </Link>
         </div>
         <div className="icons">
-          <div>
+          <div onClick={() => handleIconClick("/Flights")}>
             <span>
               <FlightIcon style={{ fontSize: 30, padding: 4 }}></FlightIcon>
             </span>
             <p>Flights</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Hotels")}>
             <span>
               <HotelIcon style={{ fontSize: 30, padding: 4 }}></HotelIcon>
             </span>
             <p>Hotels</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Homestays")}>
             <span>
               <HomeWorkIcon style={{ fontSize: 30, padding: 4 }}></HomeWorkIcon>
             </span>
             <p>Homestays</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Holidaypackages")}>
             <span>
               <HolidayVillageIcon
                 style={{ fontSize: 30, padding: 4 }}
@@ -115,13 +124,13 @@ export const Header = () => {
             </span>
             <p>Hoiday packages</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Trains")}>
             <span>
               <TrainIcon style={{ fontSize: 30, padding: 4 }}></TrainIcon>
             </span>
             <p>Trains</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Buses")}>
             <span>
               <DirectionsBusFilledIcon
                 style={{ fontSize: 30, padding: 4 }}
@@ -129,7 +138,7 @@ export const Header = () => {
             </span>
             <p>Buses</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Cabs")}>
             <span>
               <LocalTaxiIcon
                 style={{ fontSize: 30, padding: 4 }}
@@ -137,7 +146,7 @@ export const Header = () => {
             </span>
             <p>Cabs</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Visa")}>
             <span>
               <CreditCardIcon
                 style={{ fontSize: 30, padding: 4 }}
@@ -145,7 +154,7 @@ export const Header = () => {
             </span>
             <p>Visa</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/CharterFlights")}>
             <span>
               <FlightTakeoffIcon
                 style={{ fontSize: 30, padding: 4 }}
@@ -153,7 +162,7 @@ export const Header = () => {
             </span>
             <p>Charter flights</p>
           </div>
-          <div>
+          <div onClick={() => handleIconClick("/Activities")}>
             <span>
               <DownhillSkiingIcon
                 style={{ fontSize: 30, padding: 4 }}
