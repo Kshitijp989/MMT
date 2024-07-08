@@ -289,9 +289,17 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAir
         </div>
       </div>
       <div className="allData">
-        <h1>
-          Flight from {y.from} to {y.to}
-        </h1>
+      {data.length !== 0 ? (
+  data.map((e, index) => (
+    <h1 key={index}>
+      Flight from {e.departure} to {e.arrival}
+    </h1>
+  ))
+) : (
+  <h1>Please select proper date or no flight must be available on this day</h1>
+)}
+
+
         {data.map((e) => (
       
           <div key={nanoid(6)} className="maping">
