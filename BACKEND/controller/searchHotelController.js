@@ -16,17 +16,21 @@ exports.searchHotelsByCity = async (req, res) => {
     }
 };
 exports.searchHotelsByAmenities = async (req, res) => {
-    const { freeWiFi, complimentaryBreakfast, housekeeping, airConditioningHeating, sortPrice } = req.query;
+    const { city, freeWiFi, complimentaryBreakfast, housekeeping, airConditioningHeating, sortPrice } = req.query;
 
-   
+    // Initialize the query object
     const query = {};
 
+    // Add the city filter
+    if (city) query.city = city;
+
+    // Add other filters
     if (freeWiFi === 'true') query.freeWiFi = true;
     if (complimentaryBreakfast === 'true') query.complimentaryBreakfast = true;
     if (housekeeping === 'true') query.housekeeping = true;
     if (airConditioningHeating === 'true') query.airConditioningHeating = true;
 
-   
+    // Initialize the sorting object
     let sort = {};
     if (sortPrice === 'lowToHigh') {
         sort.pricePerNight = 1; // Ascending order
@@ -35,6 +39,7 @@ exports.searchHotelsByAmenities = async (req, res) => {
     }
 
     try {
+        // Find hotels based on the query and sort
         const hotels = await Hotel.find(query).sort(sort);
         res.send(hotels);
     } catch (error) {

@@ -8,22 +8,8 @@ export const HotelSearch = () => {
   const [select, setSelect] = useState({ location: "", checkin: "", checkout: "" });
 
   const handleSelect = async (select) => {
-    let isMount = true;
-    if (isMount) {
-    //   let promise = async () => {
-    //     const response = await fetch(
-    //       `http://api.example.com/v1/hotels?location=${select.location}&checkin=${select.checkin}&checkout=${select.checkout}&access_key=YOUR_ACCESS_KEY`
-    //     );
-    //     let result = await response.json();
-    //     result = result.data;
-    //     if (result.length === 0) {
-    //       alert("No hotels are available");
-    //     } else {
-    //       setData(result);
-    //     }
-    //   };
-    //   promise();
-    }
+    setSelect(select); // Update state with selected location, checkin, checkout
+    fetchHotels(select.location); // Fetch hotels based on selected location
   };
 
   const handleSort = (e) => {
@@ -44,7 +30,19 @@ export const HotelSearch = () => {
       setData(sortedList);
     }
   };
-
+  const fetchHotels = async (city) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/searchHotel?city=${city}`);
+      if (response.ok) {
+        const result = await response.json();
+        setData(result); // Update state with fetched hotel data
+      } else {
+        console.error("Failed to fetch hotels");
+      }
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
+    }
+  };
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {

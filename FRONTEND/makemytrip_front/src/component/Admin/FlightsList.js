@@ -129,7 +129,7 @@ const token = getToken();
         <td>{flight.class}</td>
        
                   <td>
-                    <Button variant="warning" className="me-2">Edit</Button>
+                    <Button variant="warning" className="me-2" onClick={() => navigate(`/update-flight/${flight._id}`)}>Edit</Button>
                     <Button variant="danger" onClick={() => deleteFlight(flight._id)}>Delete</Button>
                   </td>
                 </tr>

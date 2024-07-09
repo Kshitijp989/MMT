@@ -102,6 +102,7 @@ const Style = styled.div`
           position: relative;
           top: -20px;
         }
+          
         button {
           width: 130px;
           height: 38px;
@@ -231,90 +232,39 @@ export const BottomHotels = ({ data, bookData,sorting ,sorthigh}) => {
         <h1>
         Experience unparalleled luxury and comfort.
         </h1>
-        {data.map((e) => (
+        {data.map((hotel) => (
           <div key={nanoid(6)} className="maping">
             <div className="div1">
               <div className="one">
-                <img
-                  src={
-                    e.airline.name === "IndiGo"
-                      ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=7"
-                      : e.airline.name === "Air India"
-                      ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=7"
-                      : e.airline.name === "AirAsia"
-                      ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/I5.png?v=7"
-                      : e.airline.name === "Vistara"
-                      ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/UK.png?v=7"
-                      : e.airline.name === "SpiceJet"
-                      ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=7"
-                      : e.airline.name === "GoAir"
-                      ? "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/G8.png?v=7"
-                      : "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/G8.png?v=7"
-                  }
-                  alt=""
-                />
-                <p>{e.airline.name}</p>
+                <h6>{hotel.name}</h6>
               </div>
               <div className="two">
-                <h5>{e.departure.scheduled.split("T")[1].split("+")[0]}</h5>
-                <p>{e.departure.iata}</p>
+                <h6>{hotel.location}</h6>
               </div>
               <div className="three">
-                <p>
-                  {+e.arrival.scheduled
-                    .split("T")[1]
-                    .split("+")[0]
-                    .split(":")[0] -
-                    Number(
-                      e.departure.scheduled
-                        .split("T")[1]
-                        .split("+")[0]
-                        .split(":")[0]
-                    ) +
-                    " hours " +
-                    (+e.arrival.scheduled
-                      .split("T")[1]
-                      .split("+")[0]
-                      .split(":")[1] -
-                      Number(
-                        e.departure.scheduled
-                          .split("T")[1]
-                          .split("+")[0]
-                          .split(":")[1]
-                      ) +
-                      " minutes")}
-                </p>
-                <div></div>
-                <span>Safe Journey</span>
+                <h6>Rooms: {hotel.roomsAvailable}</h6>
+                <span>₹{hotel.pricePerNight}/night</span>
               </div>
               <div className="two">
-                <h5>{e.arrival.scheduled.split("T")[1].split("+")[0]}</h5>
-                <p>{e.arrival.iata}</p>
+                <h6>{hotel.address}</h6>
               </div>
               <h4>
-                {+e.departure.delay === 0 || null
-                  ? "₹1200"
-                  : "₹" + e.departure.delay * 200}
+                <button onClick={() => bookData(hotel)}>
+                  <Link to="/checkout">BOOK NOW</Link>
+                </button>
               </h4>
-              <button
-                onClick={() => {
-                  bookData(e);
-                }}
-              >
-                <Link to="/checkout">BOOK NOW</Link>
-              </button>
             </div>
             <div className="div2">
-              Travel to India is open for all Indian passport holders, OCI & PIO
-              cardholders holding passports of any country and all foreign
-              nationals who wish to visit India for any purpose (including their
-              dependents on appropriate category of dependent visa) except those
-              on Tourist Visa. Please read the 'Important Information' section
-              on the next screen before booking your flight.
+              <h6>
+                {hotel.freeWiFi && "Free Wi-Fi"}
+                {hotel.complimentaryBreakfast && ", Complimentary Breakfast"}
+                {hotel.housekeeping && ", Housekeeping"}
+                {hotel.airConditioningHeating && ", Air Conditioning/Heating"}
+              </h6>
             </div>
             <div className="div3">
               <p>Easily Refundable</p>
-              <p>View Flight Details</p>
+              <p>View Hotel Details</p>
             </div>
           </div>
         ))}

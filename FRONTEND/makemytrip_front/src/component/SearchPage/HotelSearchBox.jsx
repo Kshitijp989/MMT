@@ -1,4 +1,4 @@
-import { useContext,useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import Statecontext from '../Context/Statecontext';
 
@@ -23,40 +23,8 @@ const Style = styled.div`
       justify-content: space-around;
       padding-top: 8px;
       align-items: center;
-      .first {
-        width: 120px;
-        padding: 0;
-        margin: 0;
-        line-height: 0px;
-        text-align: center;
-        background: rgba(104, 105, 104, 0.3);
-        border-radius: 5px;
-        p {
-          font-size: 14px;
-          font-weight: 600;
-          color: #2c98f1;
-        }
-        select {
-          border: 0px;
-          //-webkit-appearance: none;
-          -moz-appearance: none;
-          text-indent: 1px;
-          color: white;
-          font-size: 17px;
-          text-overflow: "";
-          outline: 0px;
-          width: 100%;
-          text-align: center;
-          background-color: transparent;
-          padding: 3px;
-        }
-        option {
-          background-color: #7e7e7e;
-        }
-      }
       .second {
         width: 170px;
-        //line-height: 0;
         background: rgba(104, 105, 104, 0.3);
         border-radius: 5px;
         p {
@@ -67,7 +35,6 @@ const Style = styled.div`
         }
         select {
           border: 0px;
-          //-webkit-appearance: none;
           -moz-appearance: none;
           text-indent: 8px;
           color: white;
@@ -75,7 +42,7 @@ const Style = styled.div`
           text-overflow: "";
           outline: 0px;
           width: 100%;
-          background-color: #21233e ;
+          background-color: #21233e;
           padding: 3px;
         }
         option {
@@ -105,39 +72,34 @@ const Style = styled.div`
     z-index: 100;
     top: 0;
   }
-    .fromtodiv {
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    height: 87%;
-       p {
-          font-size: 14px;
-          font-weight: 600;
-          margin-left: 10px;
-          color: #2c98f1;
-        }
-}
-    .date{
-    border:none;
+  .date {
+    border: none;
     font-size: 16px;
     margin-left: 10px;
     color: white;
     background-color: transparent;
-}
+  }
 `;
 
 export const HotelSearchBox = ({ handle }) => {
-  const {apiBaseUrl}=useContext(Statecontext);
-    const [text, setText] = useState([]);
-    useEffect(() => {
-      let promise = async () => {
-        const data = await fetch(
-          `${apiBaseUrl}getallcountry/countries/cities`
-        );
-        const ans = await data.json();
-        setText(ans);
-      };
-      promise();
-    }, []);
+  const { apiBaseUrl } = useContext(Statecontext);
+  const [text, setText] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${apiBaseUrl}getallcountry/countries/cities`);
+        if (response.ok) {
+          const data = await response.json();
+          setText(data);
+        } else {
+          console.error('Failed to fetch cities');
+        }
+      } catch (error) {
+        console.error('Error fetching cities:', error);
+      }
+    };
+    fetchData();
+  }, [apiBaseUrl]);
 
   const [select, setSelect] = useState({
     location: "",
@@ -149,11 +111,12 @@ export const HotelSearchBox = ({ handle }) => {
     const { value, name } = e.target;
     setSelect({
       ...select,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleButton = () => {
+    console.log("Get Value Over here", select);
     handle(select);
   };
 
@@ -169,25 +132,27 @@ export const HotelSearchBox = ({ handle }) => {
 
   return (
     <Style>
-      <div className={nav === true ? "hello jelo" : "jelo"}>
+      <div className={nav ? "hello jelo" : "jelo"}>
         <div className="topdiv">
           <div className="second">
             <p>Location</p>
-            <select onChange={handleSelect} name="location" id="">
-            {text.map((e) => (
-              <option value={e.airportCode} key={e.cityName}
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                color: "White",
-                fontSize: "17px",
-                padding: "3px"
-              }}
-            >
-                {e.cityName}
-              </option>
-            ))}
-          </select>
+            <select onChange={handleSelect} name="location" id="location" value={select.location}>
+              {text.map((e) => (
+                <option
+                  key={e.cityName}
+                  style={{
+                    border: "none",
+                    backgroundColor: "transparent",
+                    color: "white",
+                    fontSize: "17px",
+                    padding: "3px"
+                  }}
+                  value={e.cityName}
+                >
+                  {e.cityName}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="second">
             <p>Check-in</p>
@@ -217,3 +182,5 @@ export const HotelSearchBox = ({ handle }) => {
     </Style>
   );
 };
+
+export default HotelSearchBox;

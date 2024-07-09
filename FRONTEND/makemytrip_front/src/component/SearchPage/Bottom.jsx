@@ -375,13 +375,16 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAir
                  
               </h7> 
               <h7> Premium {"₹"+e.oneWayPricePremium}</h7>
-              <button
+              {/* <button
                 onClick={() => {
                   bookData(e);
                 }}
               >
                 <Link to="/checkout">BOOK NOW</Link>
-              </button>
+              </button> */}
+                <Link to={`/flight-booking/${e._id}`}>
+              <button onClick={() => bookData(e)}>Book</button>
+            </Link>
             </div>
             <div className="div2">
               Travel to India is open for all Indian passport holders, OCI & PIO
