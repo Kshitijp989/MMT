@@ -99,14 +99,20 @@ const Style = styled.div`
     font-size: 16px;
     width: 100%;
   }
-  
-`
-export const LoginForm = (props) => {
+`;
 
-  const { handleOtpStatus,handleChange,hashHandleChange,value } = props;
+export const LoginForm = ({ handleClick }) => {
+  const { setAuthToken } = useAuth();
+  const [value, setValue] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (name) => (event) => {
+    setValue({ ...value, [name]: event.target.value });
+  };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
     
     if(value.phone.length === 10) {
@@ -134,37 +140,38 @@ export const LoginForm = (props) => {
   return (
     <Style>
       <div className="loginForm">
-
         <div className="acc-type">
           <div className="active-login">PERSONAL ACCOUNT</div>
-          <div> MYBIZ ACCOUNT</div>
+          <div>ADMIN ACCOUNT</div>
         </div>
 
-        <h1>Login/signup </h1>
+        <h1>Login/signup</h1>
 
         <form onSubmit={handleSubmit}>
-
           <div className="inp-wrap">
-            <label>Enter Mobile Number</label>
-
+            <label>Email</label>
             <div className="inp">
               <input
-                type="text"
-                onChange={handleChange('phone')}
-                placeholder="987*****21"
-                minLength="10"
-                value={value.phone}
+                type="email"
+                onChange={handleChange("email")}
+                placeholder="user@gmail.com"
+                value={value.email}
                 required
               />
             </div>
+          </div>
 
-            <p
-              className={
-                value.phone.length  === 10 ||  value.phone.length  === 0 ? "hide" : "indicate"
-              }
-            >
-              Please enter a 10 digit valid Mobile Number.
-            </p>
+          <div className="inp-wrap">
+            <label>Password</label>
+            <div className="inp">
+              <input
+                type="password"
+                onChange={handleChange("password")}
+                placeholder="*******"
+                value={value.password}
+                required
+              />
+            </div>
           </div>
 
           <div>
@@ -172,18 +179,8 @@ export const LoginForm = (props) => {
           </div>
         </form>
 
-        <p className="other-option">Or Login/Signup With</p>
-
-        <div>
-          <div className="google-signup">
-            <span className="g-logo">
-              <img
-                src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-logos-vector-eps-cdr-svg-download-10.png"
-                alt="google-logo"
-              />
-            </span>
-            <span>Login with Google</span>
-          </div>
+        <div align="center">
+          <a href="/SignUp">Or Signup</a>
         </div>
         <p className="tc">
           By proceeding, you agree to MakeMyTrip's{" "}
