@@ -21,6 +21,7 @@ const CouponCodesStyle = styled.div`
 
 const CouponCodes = () => {
   return (
+
     <CouponCodesStyle>
       <div className="coupon-codes">
         <h3>Coupon Codes</h3>

@@ -7,6 +7,7 @@ import GuestDetails from './GuestDetails';
 import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
 
+
 const Style = styled.div`
   height: 100%;
   background: linear-gradient(to top, #030779 0%, #03053b 50%, #03043d 50%, #020420 100%);
@@ -27,6 +28,7 @@ const Style = styled.div`
 const BookingPage = () => {
   return (
     <>
+
       <Header />
       <Style>
         <h1>Review your Booking</h1>
@@ -38,6 +40,7 @@ const BookingPage = () => {
             <GuestDetails />
           </div>
         </div>
+
       </Style>
       <Bottom />
     </>

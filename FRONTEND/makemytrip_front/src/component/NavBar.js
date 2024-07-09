@@ -7,7 +7,7 @@ const NavBar = () => {
     
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       {/* <a className="navbar-brand" href="#">Admin Panel</a> */}
-      <Link className="navbar-brand" to="/admin">
+      <Link className="navbar-brand" to="/">
         <img src={logo} alt="Admin Panel Logo" style={{ height: '30px' }} />
       </Link>
       <div className="collapse navbar-collapse" id="navbarNav">

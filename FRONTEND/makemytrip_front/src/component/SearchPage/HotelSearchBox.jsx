@@ -82,6 +82,7 @@ const Style = styled.div`
 `;
 
 export const HotelSearchBox = ({ handle }) => {
+const[select,setSelect]=useState([]);
   const { apiBaseUrl } = useContext(Statecontext);
   const [text, setText] = useState([]);
   useEffect(() => {
@@ -101,11 +102,7 @@ export const HotelSearchBox = ({ handle }) => {
     fetchData();
   }, [apiBaseUrl]);
 
-  const [select, setSelect] = useState({
-    location: "",
-    checkin: "",
-    checkout: ""
-  });
+
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
@@ -136,6 +133,7 @@ export const HotelSearchBox = ({ handle }) => {
         <div className="topdiv">
           <div className="second">
             <p>Location</p>
+
             <select onChange={handleSelect} name="location" id="location" value={select.location}>
               {text.map((e) => (
                 <option
@@ -153,6 +151,7 @@ export const HotelSearchBox = ({ handle }) => {
                 </option>
               ))}
             </select>
+
           </div>
           <div className="second">
             <p>Check-in</p>
@@ -161,7 +160,7 @@ export const HotelSearchBox = ({ handle }) => {
               id="checkin"
               className="date"
               name="checkin"
-              value={select.checkin}
+              value={select.checkIn}
               onChange={handleSelect}
             />
           </div>

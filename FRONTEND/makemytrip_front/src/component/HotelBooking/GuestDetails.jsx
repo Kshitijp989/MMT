@@ -39,6 +39,7 @@ const GuestDetails = () => {
   const [mobile, setMobile] = useState('');
 
   return (
+
     <GuestDetailsStyle>
       <div className="guest-details">
         <h3>Guest Details</h3>
@@ -71,6 +72,7 @@ const GuestDetails = () => {
         </div>
       </div>
     </GuestDetailsStyle>
+
   );
 };
 

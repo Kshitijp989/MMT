@@ -43,7 +43,7 @@ const FlightBookingPage = () => {
   };
 
   const handleBooking = async () => {
-    console.log(here)
+  
     const bookingData = {
       flightId: flight._id,
       passengerName: guestDetails.name,

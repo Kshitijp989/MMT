@@ -53,11 +53,13 @@ const BookingFormStyle = styled.div`
 
 const BookingForm = () => {
   return (
+
     <BookingFormStyle>
       <div className="booking-form">
         <div className="hotel-info">
           <h2>The Hq</h2>
           <p>Swatantra Path, Vasco da Gama, Goa, India</p>
+
         </div>
         <div className="check-in-out">
           <div>
@@ -81,7 +83,9 @@ const BookingForm = () => {
           <label htmlFor="breakfast">Add Breakfast for ₹ 261 for all guests</label>
         </div>
       </div>
+
     </BookingFormStyle>
+
   );
 };
 

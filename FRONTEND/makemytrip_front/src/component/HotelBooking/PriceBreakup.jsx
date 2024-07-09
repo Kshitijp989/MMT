@@ -21,6 +21,7 @@ const PriceBreakupStyle = styled.div`
 
 const PriceBreakup = () => {
   return (
+
     <PriceBreakupStyle>
       <div className="price-breakup">
         <h3>Price Breakup</h3>
@@ -31,6 +32,7 @@ const PriceBreakup = () => {
         <p>Total Amount to be paid: ₹ 2,389</p>
       </div>
     </PriceBreakupStyle>
+
   );
 };
 
