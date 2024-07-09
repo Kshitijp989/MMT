@@ -64,12 +64,13 @@ export const Search = () => {
       });
       const ans = response.data;
      
-      if (ans.length === 0) {
-        alert("No planes are available");
-      } else {
+      // if (ans.length === 0) {
+      //   alert("No planes are available");
+      // } else {
+
         setData(ans);
         console.log(ans, "check");
-      }
+      // }
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("An error occurred while fetching data");
@@ -93,12 +94,13 @@ export const Search = () => {
   
       const ans = response.data;
   
-      if (ans.length === 0) {
-        alert("No planes are available");
-      } else {
+      // if (ans.length === 0) {
+      //   alert("No planes are available");
+      // } else {
+
         setData(ans);
         console.log(ans, "check");
-      }
+      // }
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("An error occurred while fetching data");

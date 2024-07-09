@@ -27,6 +27,7 @@ app.use('/api/admin/hotels', require('./routes/hotelRoutes'));
 app.use('/api/getallcountry', require('./routes/countryRoutes'));
 app.use('/api/searchFlight', require('./routes/searchFlightRoutes'));
 app.use('/api/searchHotel', require('./routes/searchHotelRoutes'));
+app.use('/api', require('./routes/bookingRoutes'));
 // const PORT = process.env.PORT || 5000;
 
 // app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
