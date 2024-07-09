@@ -6,6 +6,7 @@ import backgroundImage from '../../Assets/Hotel.jpg';
 import './HotelList.css';
 import Statecontext from '../Context/Statecontext';
 import { useNavigate } from "react-router-dom";
+import { getToken } from '../login/loginpanel/LoginForm';
 
 const HotelsList = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const HotelsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(100);
   const {apiBaseUrl}=useContext(Statecontext);
+  const token = getToken();
   useEffect(() => {
     fetchHotels();
   }, []);
@@ -22,12 +24,17 @@ const HotelsList = () => {
        const url=`${apiBaseUrl}admin/hotels`
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MjAzNjE1NjMsImV4cCI6MTcyMDM2NTE2M30.2YZqJJsD-jZhhgRka4XxZo9MN6scZ3gqKVxWfwSfUYU'
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4MTMyMjQxZGNiZTgxZGQ1NWM1YWZkIiwibmFtZSI6IlNIRVRFSiIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MjAzNjE1NjMsImV4cCI6MTcyMDM2NTE2M30.2YZqJJsD-jZhhgRka4XxZo9MN6scZ3gqKVxWfwSfUYU'
+        'Authorization': 'Bearer ' + token
         }
       });
       setHotels(response.data);
     } catch (error) {
       console.error('Error fetching hotels:', error);
+      if(error.response.status==403){
+        alert('Log In as Admin')
+        navigate('/')
+      }
     }
   };
 

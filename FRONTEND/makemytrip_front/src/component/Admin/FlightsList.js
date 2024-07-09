@@ -6,6 +6,7 @@ import backgroundImage from '../../Assets/flight.jpg';
 import './FlightsList.css';
 import Statecontext from '../Context/Statecontext';
 import { useNavigate } from "react-router-dom";
+import { getToken } from '../login/loginpanel/LoginForm';
 
 const FlightsList = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const FlightsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(100);
 const {apiBaseUrl}=useContext(Statecontext);
+const token = getToken();
   useEffect(() => {
     fetchFlights();
   }, []);
@@ -20,16 +22,21 @@ const {apiBaseUrl}=useContext(Statecontext);
   const fetchFlights = async () => {
     try {
       const url=`${apiBaseUrl}admin/flights`
-      console.log(url,"here it is")
       const response = await axios.get(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
-
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+          'Authorization': 'Bearer ' + token
         }
       });
+      console.log(response)
+      if(response.status==200)
       setFlights(response.data);
     } catch (error) {
       console.error('Error fetching flights:', error);
+      if(error.response.status==403){
+        alert('Log In as Admin')
+        navigate('/')
+      }
     }
   };
 
@@ -38,7 +45,8 @@ const {apiBaseUrl}=useContext(Statecontext);
       const url = `${apiBaseUrl}admin/flights/${flightId}`;
       await axios.delete(url, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+        'Authorization': 'Bearer ' + token
         }
       });
       setFlights(flights.filter(flight => flight._id !== flightId));

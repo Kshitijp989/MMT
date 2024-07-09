@@ -124,6 +124,9 @@ export const LoginForm = (props) => {
       .then((res) => {
         alert("Login Success");
         localStorage.setItem("token", res.data.token);
+        console.log(res.data.payLoad)
+
+        window.location.reload()
         // window.location.reload();
       })
       .catch((err) => {

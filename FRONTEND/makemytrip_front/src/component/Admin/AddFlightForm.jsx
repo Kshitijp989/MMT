@@ -6,6 +6,7 @@ import backgroundImage from '../../Assets/flight.jpg';
 import Statecontext from '../Context/Statecontext';
 import { useNavigate } from "react-router-dom";
 import './FlightsList.css';
+import { getToken } from '../login/loginpanel/LoginForm';
 
 const AddFlightForm = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const AddFlightForm = () => {
     });
   };
 
+  const token = getToken();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,12 +48,17 @@ const AddFlightForm = () => {
       await axios.post(url, flight, {
         method:"POST",
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+        'Authorization': 'Bearer ' + token
         }
       });
       navigate('/admin/flight');
     } catch (error) {
       console.error('Error adding flight:', error);
+      if(error.response.status==403){
+        alert('Log In as Admin')
+        navigate('/')
+      }
     }
   };
 

@@ -3,7 +3,7 @@ import BookingForm from './BookingForm';
 import PriceBreakup from './PriceBreakup';
 import CouponCodes from './CouponCodes';
 import GuestDetails from './GuestDetails';
-import './BookingPage.css';
+import './Bookingform.css';
 import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
 import styled from 'styled-components';

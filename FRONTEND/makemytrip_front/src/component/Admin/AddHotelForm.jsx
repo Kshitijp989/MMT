@@ -6,6 +6,7 @@ import backgroundImage from '../../Assets/Hotel.jpg';
 import Statecontext from '../Context/Statecontext';
 import { useNavigate } from "react-router-dom";
 import './HotelList.css';
+import { getToken } from '../login/loginpanel/LoginForm';
 
 const AddHotelForm = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const AddHotelForm = () => {
        [name]: type === 'checkbox' ? checked : value
     });
   };
-
+const token = getToken();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -41,12 +42,17 @@ const AddHotelForm = () => {
       await axios.post(url, hotel, {
         method:"POST",
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+          'Authorization': 'Bearer ' + token
         }
       });
       navigate('/admin/Hotels');
     } catch (error) {
       console.error('Error adding Hotels:', error);
+      if(error.response.status==403){
+        alert('Log In as Admin')
+        navigate('/')
+      }
     }
   };
 

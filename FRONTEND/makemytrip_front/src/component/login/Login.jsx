@@ -91,12 +91,17 @@ export const Login = ({ handleClick}) => {
   
   const logOut = ()=>{
 
-    axios.get("http://localhost:4000/logout").then((res)=>{
-      console.log(res.data)
-      // window.location.reload();
-    }).catch((err)=>{
-      console.error(err.response)
-    })
+    // axios.get("http://localhost:4000/logout").then((res)=>{
+    //   console.log(res.data)
+    //   // window.location.reload();
+    // }).catch((err)=>{
+    //   console.error(err.response)
+    // })
+
+    localStorage.setItem("token", "");
+    setUser("");
+    window.location.reload()
+    
   }
   const handleUser = (user)=>{
 
