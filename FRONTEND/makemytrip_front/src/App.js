@@ -14,6 +14,7 @@ import AddFlightForm from './component/Admin/AddFlightForm';
 import HotelsList from './component/Admin/HotelsList';
 import { useState } from 'react';
 import AddHotelForm from './component/Admin/AddHotelForm';
+import BookingPage from './component/HotelBooking/BookingPage';
 
 
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/admin/hotel" element={<HotelsList/>}/>
             <Route path="/add-flight" element={<AddFlightForm />} />
             <Route path="/add-hotel" element={<AddHotelForm />} />
+            <Route path="/booking" element={<BookingPage/>}/>
 
           </Routes>
         </div>

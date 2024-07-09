@@ -1,7 +1,9 @@
-import axios from "axios"
-import styled from 'styled-components'
+import axios from "axios";
+import styled from "styled-components";
+import React from "react";
+
 const Style = styled.div`
-.loginForm {
+  .loginForm {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -101,8 +103,7 @@ const Style = styled.div`
   }
 `;
 
-export const LoginForm = ({ handleClick }) => {
-  const { setAuthToken } = useAuth();
+export const LoginForm = (props) => {
   const [value, setValue] = React.useState({
     email: "",
     password: "",
@@ -114,27 +115,21 @@ export const LoginForm = ({ handleClick }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if(value.phone.length === 10) {
 
-      axios.post("http://localhost:4000/sendOTP",{
-        phone:`+91${value.phone}`,
-
-      }).then((res)=>{
-        console.log(res.data.otp)
-        //console.log(res);
-        const hash = res.data.hash;
-        hashHandleChange(hash);
+    axios
+      .post("http://localhost:5000/api/auth/Login", {
+        email: value.email,
+        password: value.password,
       })
-
-      handleOtpStatus();
-    }
-    
-    else{
-      alert("Invalid mobile number")
-      
-    }
-   
+      .then((res) => {
+        alert("Login Success");
+        localStorage.setItem("token", res.data.token);
+        // window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.response.data.msg);
+        // console.error(err.response.data.msg);
+      });
   };
 
   return (
@@ -145,7 +140,7 @@ export const LoginForm = ({ handleClick }) => {
           <div>ADMIN ACCOUNT</div>
         </div>
 
-        <h1>Login/signup</h1>
+        <h1>Login/signup </h1>
 
         <form onSubmit={handleSubmit}>
           <div className="inp-wrap">
@@ -168,6 +163,7 @@ export const LoginForm = ({ handleClick }) => {
                 type="password"
                 onChange={handleChange("password")}
                 placeholder="*******"
+                maxLength="10"
                 value={value.password}
                 required
               />
@@ -190,4 +186,8 @@ export const LoginForm = ({ handleClick }) => {
       </div>
     </Style>
   );
+};
+
+export const getToken = () => {
+  return localStorage.getItem("token");
 };
