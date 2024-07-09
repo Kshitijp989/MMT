@@ -8,7 +8,7 @@ import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
 import styled from 'styled-components';
 const Style = styled.div`
-  height: 700px;
+  height: 900px;
   background: linear-gradient(
     to top,
     #030779 0%,
@@ -16,7 +16,8 @@ const Style = styled.div`
     #03043d 50%,
     #020420 100%
   );
-  color:white`
+  color:white
+  `
 
 
 const BookingPage = () => {
@@ -27,10 +28,18 @@ const BookingPage = () => {
         <Header/>
         <Style>
       <h1>Review your Booking</h1>
+      <div className="row">
+      <div className="col-md-1"></div>
       <BookingForm />
+      <div className="col-md-1"></div>
       <PriceBreakup />
+      <div className="col-md-1"></div>
+      <div className="col-md-1"></div>
       <CouponCodes />
+      <div className="col-md-1"></div>
       <GuestDetails />
+      </div>
+      <button type='submit' className='buttonsum'>Book</button>
       </Style>
       <Bottom/>
     </>

@@ -6,6 +6,8 @@ const GuestDetails = () => {
   const [mobile, setMobile] = useState('');
 
   return (
+    <div class="card col-md-4 bottomcard">
+      <form>
     <div className="guest-details">
       <h3>Guest Details</h3>
       <div className="form-group">
@@ -35,7 +37,11 @@ const GuestDetails = () => {
           onChange={(e) => setMobile(e.target.value)}
         />
       </div>
+      
     </div>
+    </form>
+    </div>
+    
   );
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 const BookingForm = () => {
   return (
+    <div class="card col-md-5">
     <div className="booking-form">
       <div className="hotel-info">
         <h2>The Hq</h2>
@@ -28,6 +29,7 @@ const BookingForm = () => {
         <input type="checkbox" id="breakfast" />
         <label htmlFor="breakfast">Add Breakfast for ₹ 261 for all guests</label>
       </div>
+    </div>
     </div>
   );
 };
