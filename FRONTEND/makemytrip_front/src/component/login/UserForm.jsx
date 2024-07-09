@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { useAuth } from "./AuthContext";  // Adjust the import path as necessary
+import { useAuth } from "./loginpanel/AuthContext";  // Adjust the import path as necessary
+import { useNavigate } from "react-router-dom";
+import { Header } from "../SearchPage/Header";
 
 const Style = styled.div`
   form {
@@ -45,8 +47,9 @@ const Style = styled.div`
   }
 `;
 
-export default function UserForm({ handleClick }) {
-  const { setAuthToken } = useAuth();
+export default function UserForm() {
+  //const { setAuthToken } = useAuth();
+  const navigate = useNavigate();
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -54,18 +57,20 @@ export default function UserForm({ handleClick }) {
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     axios
-      .post("http://localhost:5000/api/auth/Signup", newUser)
+      .post("http://localhost:5000/api/auth/Register", newUser)
       .then((res) => {
         alert("Signup Success");
-        setAuthToken(res.data.token);
-        handleClick();
+        localStorage.setItem("token", res.data.token);
+       // handleClick();
+        //navigate('/')
       })
       .catch((err) => {
         alert(err.response.data.msg);
       });
   };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,7 +80,10 @@ export default function UserForm({ handleClick }) {
     });
   };
   return (
+    <>
+    <Header/>
     <Style>
+     
       <form onSubmit={handleSubmit} className="userform">
         <label>Enter full name</label>
         <input
@@ -114,5 +122,6 @@ export default function UserForm({ handleClick }) {
         </button>
       </form>
     </Style>
+    </>
   );
 }

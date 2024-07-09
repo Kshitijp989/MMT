@@ -140,6 +140,7 @@ export const Login = ({ handleClick}) => {
           handleUser={handleUser}               //setting user details
           />             
       </div>
+      
     </Style>
   );
 };

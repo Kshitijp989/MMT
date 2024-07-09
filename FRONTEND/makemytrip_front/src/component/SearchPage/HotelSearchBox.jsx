@@ -126,24 +126,30 @@ const Style = styled.div`
 `;
 
 export const HotelSearchBox = ({ handle }) => {
-  const {apiBaseUrl}=useContext(Statecontext);
+
+  const {
+    location, setLocation, checkIn, setCheckIn, checkOut, setcheckOut, apiBaseUrl
+  } = useContext(Statecontext); 
+
+    
+
+    const [select, setSelect] = useState({
+      location: location,
+      checkIn: checkIn,
+      checkOut: checkOut,
+    });
+
     const [text, setText] = useState([]);
+
     useEffect(() => {
       let promise = async () => {
-        const data = await fetch(
-          `${apiBaseUrl}getallcountry/countries/cities`
-        );
+      const data = await fetch(`${apiBaseUrl}getallcountry/countries/cities`);
         const ans = await data.json();
         setText(ans);
       };
       promise();
-    }, []);
+    }, [apiBaseUrl]);
 
-  const [select, setSelect] = useState({
-    location: "",
-    checkin: "",
-    checkout: ""
-  });
 
   const handleSelect = (e) => {
     const { value, name } = e.target;
@@ -175,7 +181,7 @@ export const HotelSearchBox = ({ handle }) => {
             <p>Location</p>
             <select onChange={handleSelect} name="location" id="">
             {text.map((e) => (
-              <option value={e.airportCode} key={e.cityName}
+              <option value={e.cityName} key={e.cityName}
               style={{
                 border: "none",
                 backgroundColor: "transparent",
@@ -196,7 +202,7 @@ export const HotelSearchBox = ({ handle }) => {
               id="checkin"
               className="date"
               name="checkin"
-              value={select.checkin}
+              value={select.checkIn}
               onChange={handleSelect}
             />
           </div>

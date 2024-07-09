@@ -15,6 +15,7 @@ import HotelsList from './component/Admin/HotelsList';
 import { useState } from 'react';
 import AddHotelForm from './component/Admin/AddHotelForm';
 import BookingPage from './component/HotelBooking/BookingPage';
+import UserForm from './component/login/UserForm';
 
 
 
@@ -28,6 +29,7 @@ function App() {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [travellerClass, setTravellerClass] = useState("");
+
   return (
     <div className="App">
    
@@ -59,6 +61,7 @@ function App() {
             <Route path="/add-flight" element={<AddFlightForm />} />
             <Route path="/add-hotel" element={<AddHotelForm />} />
             <Route path="/booking" element={<BookingPage/>}/>
+            <Route path="/SignUp" element={<UserForm/>}/>
 
           </Routes>
         </div>
