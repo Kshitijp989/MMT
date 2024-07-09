@@ -1,9 +1,10 @@
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { LoginPanel } from "./loginpanel/LoginPanel";
 import Auth from "../../auth";
 import axios from "axios";
 import styled from 'styled-components'
+import {jwtDecode} from 'jwt-decode';
 const Style = styled.div`
 .loginTrigger {
     width: 30%;
@@ -86,9 +87,15 @@ button{
   
 `
 export const Login = ({ handleClick}) => {
-  
   const [user, setUser] = useState({name:"Traveller"});
-  
+  useEffect(() => {
+  const token = localStorage.getItem('token'); // Replace with your token storage method
+
+  if (token) {
+    const decoded = jwtDecode(token); // Corrected function usage
+    setUser(decoded.user);
+  }
+}, []);
   const logOut = ()=>{
 
     // axios.get("http://localhost:4000/logout").then((res)=>{
