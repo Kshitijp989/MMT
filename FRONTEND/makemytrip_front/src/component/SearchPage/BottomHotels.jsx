@@ -177,16 +177,22 @@ const Style = styled.div`
     }
   }
 `;
-export const BottomHotels = ({ data, bookData,sorting ,sorthigh}) => {
+export const BottomHotels = ({ data, bookData,sorting ,sorthigh,handleWifi,handleHousekeeping,HandleBreakfast,handleAcHeating}) => {
   const [value, setValue] = useState("");
   const handleSlider = (e) => {
     setValue(e.target.value);
   };
   const handleSort = (e)=>{
+    console.log("handle sort 1st",e)
       sorting(e.target.checked)
   }
   const handleHigh = (e)=>{
+    console.log("handle sort 1st high",e)
     sorthigh(e.target.checked)
+  }
+  const handleHouse = (e)=>{
+    console.log("handle handleHouse",e)
+    handleHousekeeping(e.target.checked)
   }
   let x = localStorage.getItem("myKey");
   let y = JSON.parse(x);
@@ -196,30 +202,30 @@ export const BottomHotels = ({ data, bookData,sorting ,sorthigh}) => {
         <div className="firstFilter">
           <h3>Sort by price</h3>
           <div className="div">
-            <input onChange={handleSort} type="checkbox" />
+            <input onChange={handleSort} type="radio" name="sort"/>
             <p>Low to High</p>
           </div>
           <div className="div">
-            <input onChange={handleHigh} type="checkbox" />
+            <input onChange={handleHigh} type="radio" name="sort"/>
             <p>High to Low</p>
           </div>
         </div>
         <div className="firstFilter">
           <h3>Amenities</h3>
           <div className="div">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={handleWifi}/>
             <p>Free Wi-Fi</p>
           </div>
           <div className="div">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={HandleBreakfast}/>
             <p>Complimentary Breakfast</p>
           </div>
           <div className="div">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={handleHousekeeping}/>
             <p>Housekeeping</p>
           </div>
           <div className="div">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={handleAcHeating} />
             <p>Air Conditioning/Heating</p>
           </div>
         </div>

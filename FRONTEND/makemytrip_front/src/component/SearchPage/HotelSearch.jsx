@@ -15,7 +15,7 @@ export const HotelSearch = () => {
   const { location, setLocation, checkIn, setCheckIn, checkOut, setcheckOut, apiBaseUrl } = useContext(Statecontext);
   
   const [select, setSelect] = useState({ location: "", checkin: "", checkout: "" });
-
+  const [arrOfHotels,setarrOfHotels]=useState([]);
   const handleSelect = async (select) => {
 
     setSelect(select); // Update state with selected location, checkin, checkout
@@ -24,25 +24,30 @@ export const HotelSearch = () => {
 
 
   const handleSort = (e) => {
+ 
     if (e === true) {
       const sortedList = [...data].sort(
-        (a, b) => a.price - b.price
+        (a, b) => a.pricePerNight - b.pricePerNight
       );
+    
       setData(sortedList);
     }
   };
 
   const handleHigh = (e) => {
+ 
     if (e === true) {
       const sortedList = [...data].sort(
-        (a, b) => a.pricePerNight - b.pricePerNight
+        (a, b) => b.pricePerNight - a.pricePerNight
       );
-      sortedList.reverse();
+    
+     
       setData(sortedList);
     }
   };
 
   const fetchHotels = async (city) => {
+    setLocation(city)
     try {
       const response = await fetch(`http://localhost:5000/api/searchHotel?city=${city}`);
       if (response.ok) {
@@ -58,21 +63,14 @@ export const HotelSearch = () => {
  
 
   const handleHousekeeping = (e) => {
-    if (e === true) {
-      setHousekeeping(e);
-      fetchDataByFilter()
-    }else{
-      fetchData();
-    }
+    console.log('handleHousekeeping',e.target.checked)
+    setHousekeeping(e.target.checked);
+   
   };
 
   const handleAcHeating = (e) => {
-    if (e === true) {
-      setAcHeating(e);
-      fetchDataByFilter()
-    }else{
-      fetchData();
-    }
+    setAcHeating(e.target.checked);
+   
   };
 
   const HandleBreakfast = (e) => {
@@ -114,6 +112,7 @@ export const HotelSearch = () => {
 
   const fetchDataByFilter = async () => {
   try {
+   
     const requestBody = {
       city: location,
       checkIn: checkIn,
@@ -125,7 +124,7 @@ export const HotelSearch = () => {
       Range : range
 
     };
-
+    console.log(requestBody,"requestBody")
     const response = await axios.post(`${apiBaseUrl}searchFlight/searchFlightsByPrice`, requestBody);
 
     const ans = response.data;
@@ -138,6 +137,38 @@ export const HotelSearch = () => {
     alert("An error occurred while fetching data");
   }
 }
+const fetchFilteredHotels = async () => {
+  try {
+    const params = {
+      city: location,
+      freeWiFi: wifi,
+      complimentaryBreakfast: breakfast,
+      housekeeping: housekeeping,
+      airConditioningHeating: acHeating,
+      sortPrice: range > 0 ? range : undefined
+    };
+    console.log(params)
+    const response = await axios.get(`${apiBaseUrl}searchHotel/searchHotelsByAmenities`, { params });
+    if (response.status === 200) {
+      setData(response.data); // Update state with filtered hotel data
+    } else {
+      console.error("Failed to fetch filtered hotels");
+    }
+  } catch (error) {
+    console.error("Error fetching filtered hotels:", error);
+  }
+};
+const handleWifi = (e) => {
+  console.log("check value",e.target.checked)
+  setWifi(e.target.checked);
+  
+};
+const handleBreakfast = (e) => {
+  setBreakfast(e.target.checked);
+}
+useEffect(()=>{
+  fetchFilteredHotels();
+},[wifi,housekeeping,breakfast,acHeating])
 
   return (
     <>
@@ -145,14 +176,15 @@ export const HotelSearch = () => {
       <HotelSearchBox handle={handleSelect} />
       <BottomHotels
         data={data}
-        sorthigh={handleHigh}
+       
         sorting={handleSort}
-        // handleWifi={handleWifi}
+        sorthigh={handleHigh}
+        handleWifi={handleWifi}
         handleHousekeeping={handleHousekeeping}
         handleAcHeating={handleAcHeating}
-        HandleBreakfast={HandleBreakfast}
-        handleRange={handleRange}
-
+        HandleBreakfast={handleBreakfast}
+        // handleRange={handleRange}
+        // handleHotels={handleHotels}
 
       />
     </>

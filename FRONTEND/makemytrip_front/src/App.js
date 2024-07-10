@@ -36,13 +36,13 @@ function App() {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [travellerClass, setTravellerClass] = useState("");
-
+  const[location, setLocation]=useState("");
   return (
     <div className="App">
    
     <Statecontext.Provider
     value={{
-      apiBaseUrl,from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass 
+      apiBaseUrl,from, location, setLocation, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass 
     }}
     >
       {/* <RouterProvider router={router}/> */}
