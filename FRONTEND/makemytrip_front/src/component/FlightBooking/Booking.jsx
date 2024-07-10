@@ -57,7 +57,7 @@ const Style = styled.div`
                   'Authorization': 'Bearer ' + token
                 }
               });
-              SetFlight(response.data);
+              //SetFlight(response.data);
              console.log(response.data);
 
          }
@@ -75,12 +75,12 @@ const Style = styled.div`
           <Header/>
           <Style>
            <BookingForm 
-            // flightNumber = {Flight.flightNumber}
-            // arrival = {Flight.arrival}
-            // departure = {Flight.departure}
-            // _id = {Flight._id}
-            // class ={Flight.class}
-            // price = {Flight.price}
+            flightNumber = {Flight.flightNumber}
+            arrival = {Flight.arrival}
+            departure = {Flight.departure}
+            _id = {Flight._id}
+            class ={Flight.class}
+            price = {Flight.price}
            />
          </Style>
         <Bottom/>
