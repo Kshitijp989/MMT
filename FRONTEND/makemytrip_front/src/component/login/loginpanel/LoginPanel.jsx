@@ -3,7 +3,6 @@ import React from "react";
 import { useState} from "react";
 import { LoginForm } from "./LoginForm";
 import { ConfirmOtp } from "./ConfirmOtp";
-import UserForm from "../UserForm";
 import Auth from "../../../auth";
 import styled from 'styled-components'
 const Style = styled.div`
@@ -117,7 +116,7 @@ export const LoginPanel = ({ handleClick, handleUser }) => {
         {
           (Auth.isAuthenticated()&& isUserExist ) ?handleNewUser(findUser):
         
-        (Auth.isAuthenticated()&& !isUserExist ) ? <UserForm handleNewUser={handleNewUser} />:otpSend ? (
+       otpSend ? (
           <ConfirmOtp
                 handleNewUser = {checkIsUserExist}
                 handleChange={handleChange}           // handling with user login inputs          
