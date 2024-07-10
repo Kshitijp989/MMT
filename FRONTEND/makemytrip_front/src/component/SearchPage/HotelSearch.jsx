@@ -169,14 +169,16 @@ const handleBreakfast = (e) => {
 useEffect(()=>{
   fetchFilteredHotels();
 },[wifi,housekeeping,breakfast,acHeating])
-
+const bookData = (e) => {
+  localStorage.setItem("buy", JSON.stringify(e));
+};
   return (
     <>
       <Header />
       <HotelSearchBox handle={handleSelect} />
       <BottomHotels
         data={data}
-       
+        bookData={bookData}
         sorting={handleSort}
         sorthigh={handleHigh}
         handleWifi={handleWifi}

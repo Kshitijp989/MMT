@@ -94,6 +94,9 @@ export const Login = ({ handleClick}) => {
   if (token) {
     const decoded = jwtDecode(token); // Corrected function usage
     setUser(decoded.user);
+    localStorage.setItem("username", decoded.user.name);
+    console.log('username',  localStorage.getItem("username"))
+    localStorage.setItem("role", decoded.user.role);
   }
 }, []);
   const logOut = ()=>{

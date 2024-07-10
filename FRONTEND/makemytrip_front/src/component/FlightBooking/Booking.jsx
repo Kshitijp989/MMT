@@ -4,7 +4,7 @@ import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
 import BookingForm from './BookingForm';
 import Statecontext from '../Context/Statecontext';
-
+import axios from 'axios';
 
 import styled from 'styled-components';
 const Style = styled.div`
@@ -21,59 +21,75 @@ const Style = styled.div`
   const Booking = () => {
 
     const token = localStorage.getItem('token'); 
-    const [Flight,SetFlight]=useState({
-        "isDelete": false,
-        "_id": "66893c4a3938ebfcef0f7c2d",
-        "flightNumber": "JL2020",
-        "departure": "Tokyo",
-        "arrival": "San Francisco",
-        "departureTime": "2024-08-19T12:00:00.000Z",
-        "arrivalTime": "2024-08-19T05:00:00.000Z",
-        "price": 900,
-        "oneWayPrice": 450,
-        "oneWayPriceEconomy": 430,
-        "oneWayPricePremium": 470,
-        "stops": 0,
-        "stopLocations": [],
-        "refundableFares": true,
-        "airlines": "Japan Airlines",
-        "cityName": "San Francisco",
-        "airportCode": "SFO",
-        "airportName": "San Francisco International Airport",
-        "class": "Business",
-        "__v": 0
+    const [Flight,setFlight]=useState({
+        // "isDelete": false,
+        // "_id": "66893c4a3938ebfcef0f7c2d",
+        // "flightNumber": "JL2020",
+        // "departure": "Tokyo",
+        // "arrival": "San Francisco",
+        // "departureTime": "2024-08-19T12:00:00.000Z",
+        // "arrivalTime": "2024-08-19T05:00:00.000Z",
+        // "price": 900,
+        // "oneWayPrice": 450,
+        // "oneWayPriceEconomy": 430,
+        // "oneWayPricePremium": 470,
+        // "stops": 0,
+        // "stopLocations": [],
+        // "refundableFares": true,
+        // "airlines": "Japan Airlines",
+        // "cityName": "San Francisco",
+        // "airportCode": "SFO",
+        // "airportName": "San Francisco International Airport",
+        // "class": "Business",
+        // "__v": 0
     });
 
     
 
     const {Id} = useParams();
     const {apiBaseUrl}=useContext(Statecontext);
-    useEffect(()=>{
-     const fetchFlight = async()=>{
-        const url=`${apiBaseUrl}flight?_id=${Id}`
-         try{
-             const response = await (url, {
-                headers: {
-                  'Authorization': 'Bearer ' + token
-                }
-              });
-              //SetFlight(response.data);
-             console.log(response.data);
+    // useEffect(()=>{
+    //  const fetchFlight = async()=>{
+    //     const url=`${apiBaseUrl}admin/flights/${Id}`
+    //      try{
+    //          const response = await (url, {
+    //             headers: {
+    //               'Authorization': 'Bearer ' + token
+    //             }
+    //           });
+    //           //SetFlight(response.data);
+    //          console.log(response.data,'flight');
 
-         }
-         catch(error){
-            console.log(error)
-         }
-     };
-     fetchFlight();
-    });
- 
+    //      }
+    //      catch(error){
+    //         console.log(error)
+    //      }
+    //  };
+    //  fetchFlight();
+    // },[Id]);
+    useEffect(() => {
+      const fetchFlight = async () => {
+        const url = `${apiBaseUrl}admin/flights/${Id}`;
+        try {
+          const response = await axios.get(url, {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            }
+          });
+          setFlight(response.data);
+          console.log(response.data, 'flight');
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchFlight();
+    }, [Id]);
 
     return (
       
       <>
           <Header/>
-          <Style>
+          {/* <Style>
            <BookingForm 
             flightNumber = {Flight.flightNumber}
             arrival = {Flight.arrival}
@@ -82,7 +98,7 @@ const Style = styled.div`
             class ={Flight.class}
             price = {Flight.price}
            />
-         </Style>
+         </Style> */}
         <Bottom/>
       </>
     );

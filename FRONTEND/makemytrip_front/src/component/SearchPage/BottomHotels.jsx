@@ -255,9 +255,9 @@ export const BottomHotels = ({ data, bookData,sorting ,sorthigh,handleWifi,handl
                 <h6>{hotel.address}</h6>
               </div>
               <h4>
-                <button onClick={() => bookData(hotel)}>
-                  <Link to="/checkout">BOOK NOW</Link>
-                </button>
+              <Link to={`/HotelBooking/${hotel._id}`}>
+              <button onClick={() => bookData(hotel)}>Book</button>
+            </Link>
               </h4>
             </div>
             <div className="div2">

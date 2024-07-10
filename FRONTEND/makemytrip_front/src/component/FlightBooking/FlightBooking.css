@@ -3512,3 +3512,8 @@ Gallery Area Style
   color: black;
   align-self: self-start;
 }
+.light-pink-background {
+  background-color: #ffcccb; /* Light pink color */
+  padding: 20px; /* Optional: Adds some padding around your content */
+  border-radius: 10px; /* Optional: Adds rounded corners to the background */
+}

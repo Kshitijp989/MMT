@@ -22,6 +22,7 @@ import FlightBookingPage from './component/FlightBooking/FlightBookingPage';
 
 import UserForm from './component/login/UserForm';
 import Booking from './component/FlightBooking/Booking';
+import Bookings from './component/HotelBooking/Booking';
 
 
 
@@ -70,6 +71,7 @@ function App() {
             <Route path="/Hotelbooking" element={<BookingPage/>}/>
             <Route path="/SignUp" element={<UserForm/>}/>
             <Route path="/FlightBooking/:Id" element={<Booking/>}/>
+            <Route path="/HotelBooking/:Id" element={<Bookings/>}/>
             <Route path="/booking" element={<BookingPage/>}/>
 
             <Route path="/update-flight/:id" element={<UpdateFlightForm />} />

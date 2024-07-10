@@ -1,15 +1,18 @@
-import React, { useState, useEffect,useRef  } from 'react';
+import React, { useState, useEffect,useRef, useContext  } from 'react';
 import FlightIcon from "@mui/icons-material/Flight";
 import './FlightBooking.css';
 import axios from 'axios';
-
+import Statecontext from '../Context/Statecontext';
+import { useNavigate } from 'react-router-dom';
 const BookingForm = (props) => {
     const [numPassengers, setNumPassengers] = useState(0);
     const [amount, setAmount] = useState(props.price);
     const [totalAmount, setTotalAmount] = useState(props.price*1.18);
     const [passengerDetails, setPassengerDetails] = useState([]);
     const emailRef = useRef(null);
-
+    const token = localStorage.getItem('token'); 
+    const {apiBaseUrl}=useContext(Statecontext);
+    const navigate = useNavigate(); 
     useEffect(() => {
         // Initialize passenger details based on the number of passengers
         const initialPassengerDetails = Array.from({ length: numPassengers }, (_, index) => ({
@@ -45,27 +48,35 @@ const BookingForm = (props) => {
     };
     
 
+  
     const handleSubmit = async (e) => {
-        var currentdate = getCurrentDate()
+        var currentdate = getCurrentDate();
         e.preventDefault();
         const payload = {
             flightId: props._id,
+            passengerName:localStorage.getItem("username"),
             passengerEmail: emailRef.current.value,
             numberOfTickets: numPassengers,
             bookingDate: currentdate,
             totalPrice: totalAmount,
-            passengerDetails
+            // passengerDetails,
         };
 
+        console.log(payload, "payload");
+
         try {
-            const response = await axios.post('http://localhost:5000/bookflight', payload);
+            const response = await axios.post(`${apiBaseUrl}book`, payload, {
+                headers: {
+                    'Authorization': `Bearer ${token}`, // Include the bearer token in the headers
+                },
+            });
             alert('Flight booked successfully!');
+            navigate('/');
         } catch (error) {
             console.error('Error booking flight:', error);
             alert('Failed to book flight. Please try again.');
         }
     };
-
     return (
         <div className="main-content-wrap">
             <div className="page-title-area">
@@ -79,7 +90,7 @@ const BookingForm = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="card-box-style">
+            <div className="card-box-style light-pink-background">
                 <div className="others-title">
                     <h3>Booking for Flight {props.flightNumber}</h3>
                 </div>
@@ -117,7 +128,7 @@ const BookingForm = (props) => {
                         <label htmlFor="Amount" className="form-label">Amount</label>
                         <input type="text" className="form-control" id="Amount" value={amount} readOnly />
                     </div>
-                    <div className="col-12">
+                    {/* <div className="col-12">
                         <label htmlFor="Passanger1" className="form-label">Passenger Details</label>
                         <table id="#PassengerTable" className="col-12">
                             <thead>
@@ -148,7 +159,7 @@ const BookingForm = (props) => {
                                 ))}
                             </tbody>
                         </table>
-                    </div>
+                    </div> */}
                     <div className="col-12">
                         <label htmlFor="Address" className="form-label">Address</label>
                         <input type="text" className="form-control" id="Address" placeholder="Apartment, studio, or floor" />

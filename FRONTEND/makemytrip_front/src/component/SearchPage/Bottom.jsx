@@ -382,7 +382,9 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAir
               >
                 <Link to="/checkout">BOOK NOW</Link>
               </button> */}
-                <Link to={`/flight-booking/${e._id}`}>
+                {/* <Link to={`/flight-booking/${e._id}`}> */}
+                {/* /FlightBooking/:Id */}
+                <Link to={`/FlightBooking/${e._id}`}>
               <button onClick={() => bookData(e)}>Book</button>
             </Link>
             </div>

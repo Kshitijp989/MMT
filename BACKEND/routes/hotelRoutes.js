@@ -5,7 +5,7 @@ const hotelController = require('../controller/hotelController');
 
 router.post('/', adminAuth, hotelController.createHotel);
 router.get('/', adminAuth, hotelController.getHotels);
-router.get('/:id', adminAuth, hotelController.getHotelById); 
+router.get('/:id', hotelController.getHotelById); 
 router.put('/:id', adminAuth, hotelController.updateHotel);
 router.delete('/:id', adminAuth, hotelController.deleteHotel);
 
