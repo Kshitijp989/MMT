@@ -15,8 +15,14 @@ import HotelsList from './component/Admin/HotelsList';
 import { useState } from 'react';
 import AddHotelForm from './component/Admin/AddHotelForm';
 import BookingPage from './component/HotelBooking/BookingPage';
+
+import UpdateFlightForm from './component/Admin/UpdateFlightForm';
+import UpdateHotelForm from './component/Admin/UpdateHotelForm';
+import FlightBookingPage from './component/FlightBooking/FlightBookingPage';
+
 import UserForm from './component/login/UserForm';
 import Booking from './component/FlightBooking/Booking';
+
 
 
 
@@ -64,6 +70,15 @@ function App() {
             <Route path="/Hotelbooking" element={<BookingPage/>}/>
             <Route path="/SignUp" element={<UserForm/>}/>
             <Route path="/FlightBooking/:Id" element={<Booking/>}/>
+            <Route path="/booking" element={<BookingPage/>}/>
+
+            <Route path="/update-flight/:id" element={<UpdateFlightForm />} />
+            <Route path="/admin/update-hotel/:id" element={<UpdateHotelForm />} />
+            <Route path="/flight-booking/:id" element={<FlightBookingPage />} />
+            <Route path="/BookingPage" element={<BookingPage />} />
+
+            <Route path="/SignUp" element={<UserForm/>}/>
+
           </Routes>
         </div>
       </BrowserRouter>

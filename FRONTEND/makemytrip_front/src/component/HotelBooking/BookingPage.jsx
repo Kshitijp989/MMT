@@ -1,47 +1,48 @@
 import React from 'react';
+import styled from 'styled-components';
 import BookingForm from './BookingForm';
 import PriceBreakup from './PriceBreakup';
 import CouponCodes from './CouponCodes';
 import GuestDetails from './GuestDetails';
-import './Bookingform.css';
 import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
-import styled from 'styled-components';
-const Style = styled.div`
-  height: 900px;
-  background: linear-gradient(
-    to top,
-    #030779 0%,
-    #03053b 50%,
-    #03043d 50%,
-    #020420 100%
-  );
-  color:white
-  `
 
+
+const Style = styled.div`
+  height: 100%;
+  background: linear-gradient(to top, #030779 0%, #03053b 50%, #03043d 50%, #020420 100%);
+  color: white;
+  padding: 20px;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .booking-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+`;
 
 const BookingPage = () => {
   return (
-    
     <>
-    
-        <Header/>
-        <Style>
-      <h1>Review your Booking</h1>
-      <div className="row">
-      <div className="col-md-1"></div>
-      <BookingForm />
-      <div className="col-md-1"></div>
-      <PriceBreakup />
-      <div className="col-md-1"></div>
-      <div className="col-md-1"></div>
-      <CouponCodes />
-      <div className="col-md-1"></div>
-      <GuestDetails />
-      </div>
-      <button type='submit' className='buttonsum'>Book</button>
+
+      <Header />
+      <Style>
+        <h1>Review your Booking</h1>
+        <div className="booking-content">
+          <BookingForm />
+          <div>
+            <PriceBreakup />
+            <CouponCodes />
+            <GuestDetails />
+          </div>
+        </div>
+
       </Style>
-      <Bottom/>
+      <Bottom />
     </>
   );
 };

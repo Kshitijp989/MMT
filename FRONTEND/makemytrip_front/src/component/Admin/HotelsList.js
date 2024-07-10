@@ -37,7 +37,20 @@ const HotelsList = () => {
       }
     }
   };
-
+  const deleteHotel = async (HotelId) => {
+    try {
+      const url = `${apiBaseUrl}admin/hotels/${HotelId}`;
+      await axios.delete(url, {
+        headers: {
+          // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY4YTdjOTM2NjA3OGM2YWNlNmM5MWY2IiwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTcyMDM3MjExNywiZXhwIjoxNzIwMzc1NzE3fQ.DwCOv2TilbrQ7VmBOnvD-_Iyj52RW35wh79MZZXsRlA'
+        'Authorization': 'Bearer ' + token
+        }
+      });
+      setHotels(hotels.filter(hotel => hotel._id !== HotelId));
+    } catch (error) {
+      console.error('Error deleting hotel:', error);
+    }
+  };
   // Calculate current items to display
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -73,8 +86,8 @@ const HotelsList = () => {
                   <td>{hotel.roomsAvailable}</td>
                   <td>${hotel.pricePerNight}</td>
                   <td>
-                    <Button variant="warning" className="me-2">Edit</Button>
-                    <Button variant="danger">Delete</Button>
+                  <Button variant="warning" className="me-2" onClick={() => navigate(`/admin/update-hotel/${hotel._id}`)}>Edit</Button>
+                    <Button variant="danger" onClick={() => deleteHotel(hotel._id)}>Delete</Button>
                   </td>
                 </tr>
               ))}

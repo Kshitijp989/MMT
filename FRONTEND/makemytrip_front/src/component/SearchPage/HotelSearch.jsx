@@ -17,15 +17,11 @@ export const HotelSearch = () => {
   const [select, setSelect] = useState({ location: "", checkin: "", checkout: "" });
 
   const handleSelect = async (select) => {
-   
-    setLocation(select.location);
-    setCheckIn(select.checkIn);
-    setcheckOut(select.checkOut);
-   };
 
-   useEffect(()=>{
-    fetchData();
-  },[location,checkIn,checkOut])
+    setSelect(select); // Update state with selected location, checkin, checkout
+    fetchHotels(select.location); // Fetch hotels based on selected location
+  };
+
 
   const handleSort = (e) => {
     if (e === true) {
@@ -46,14 +42,20 @@ export const HotelSearch = () => {
     }
   };
 
-  const handleWifi = (e) => {
-    if (e === true) {
-      setWifi(e);
-      fetchDataByFilter()
-    }else{
-      fetchData();
+  const fetchHotels = async (city) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/searchHotel?city=${city}`);
+      if (response.ok) {
+        const result = await response.json();
+        setData(result); // Update state with fetched hotel data
+      } else {
+        console.error("Failed to fetch hotels");
+      }
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
     }
   };
+ 
 
   const handleHousekeeping = (e) => {
     if (e === true) {
@@ -145,7 +147,7 @@ export const HotelSearch = () => {
         data={data}
         sorthigh={handleHigh}
         sorting={handleSort}
-        handleWifi={handleWifi}
+        // handleWifi={handleWifi}
         handleHousekeeping={handleHousekeeping}
         handleAcHeating={handleAcHeating}
         HandleBreakfast={HandleBreakfast}
