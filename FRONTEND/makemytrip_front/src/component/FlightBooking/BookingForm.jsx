@@ -28,7 +28,7 @@ const BookingForm = (props) => {
         const newNumPassengers = parseInt(e.target.value, 10) || 0;
         setNumPassengers(newNumPassengers);
         setAmount(newNumPassengers * props.price);
-        setTotalAmount(amount*1.18)
+        setTotalAmount(newNumPassengers * props.price*1.18)
     };
 
     const handlePassengerDetailChange = (index, field, value) => {
@@ -128,8 +128,8 @@ const BookingForm = (props) => {
                         <label htmlFor="Amount" className="form-label">Amount</label>
                         <input type="text" className="form-control" id="Amount" value={amount} readOnly />
                     </div>
-                    {/* <div className="col-12">
-                        <label htmlFor="Passanger1" className="form-label">Passenger Details</label>
+                    <div className="col-12">
+                        <label htmlFor="Passanger1" className="form-label" Sty>Passenger Details</label>
                         <table id="#PassengerTable" className="col-12">
                             <thead>
                                 <tr>
@@ -159,7 +159,7 @@ const BookingForm = (props) => {
                                 ))}
                             </tbody>
                         </table>
-                    </div> */}
+                    </div>
                     <div className="col-12">
                         <label htmlFor="Address" className="form-label">Address</label>
                         <input type="text" className="form-control" id="Address" placeholder="Apartment, studio, or floor" />

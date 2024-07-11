@@ -4,7 +4,8 @@ import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
 import BookingForm from './BookingForm';
 import Statecontext from '../Context/Statecontext';
-import axios from 'axios';
+import axios from "axios";
+
 
 import styled from 'styled-components';
 const Style = styled.div`
@@ -21,7 +22,7 @@ const Style = styled.div`
   const Booking = () => {
 
     const token = localStorage.getItem('token'); 
-    const [Flight,setFlight]=useState({
+    const [Flight,SetFlight]=useState({
         // "isDelete": false,
         // "_id": "66893c4a3938ebfcef0f7c2d",
         // "flightNumber": "JL2020",
@@ -48,48 +49,34 @@ const Style = styled.div`
 
     const {Id} = useParams();
     const {apiBaseUrl}=useContext(Statecontext);
-    // useEffect(()=>{
-    //  const fetchFlight = async()=>{
-    //     const url=`${apiBaseUrl}admin/flights/${Id}`
-    //      try{
-    //          const response = await (url, {
-    //             headers: {
-    //               'Authorization': 'Bearer ' + token
-    //             }
-    //           });
-    //           //SetFlight(response.data);
-    //          console.log(response.data,'flight');
+    useEffect(()=>{
+     const fetchFlight = async()=>{
+        const url=`${apiBaseUrl}admin/flights/${Id}`
+         try{
+             const response = await axios.get(url, {
+                headers: {
+                  'Authorization': 'Bearer ' + token
+                }
+              });
+             SetFlight(response.data);
+             console.log(response);
 
-    //      }
-    //      catch(error){
-    //         console.log(error)
-    //      }
-    //  };
-    //  fetchFlight();
-    // },[Id]);
-    useEffect(() => {
-      const fetchFlight = async () => {
-        const url = `${apiBaseUrl}admin/flights/${Id}`;
-        try {
-          const response = await axios.get(url, {
-            headers: {
-              'Authorization': 'Bearer ' + token
-            }
-          });
-          setFlight(response.data);
-          console.log(response.data, 'flight');
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchFlight();
+         }
+         catch(error){
+            console.log(error)
+         }
+     };
+     fetchFlight();
     }, [Id]);
 
+
+
+  
     return (
       
       <>
           <Header/>
-          {/* <Style>
+          <Style>
            <BookingForm 
             flightNumber = {Flight.flightNumber}
             arrival = {Flight.arrival}
@@ -98,7 +85,7 @@ const Style = styled.div`
             class ={Flight.class}
             price = {Flight.price}
            />
-         </Style> */}
+         </Style>
         <Bottom/>
       </>
     );
