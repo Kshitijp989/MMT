@@ -89,7 +89,7 @@ const Style = styled.div`
       
       <>
           <Header/>
-          {/* <Style>
+          <Style>
            <BookingForm 
             flightNumber = {Flight.flightNumber}
             arrival = {Flight.arrival}
@@ -98,7 +98,7 @@ const Style = styled.div`
             class ={Flight.class}
             price = {Flight.price}
            />
-         </Style> */}
+         </Style>
         <Bottom/>
       </>
     );
