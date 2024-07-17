@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate  } from 'react-router-dom';
 const Style = styled.div`
   display: grid;
   grid-template-columns: 30% 70%;
@@ -229,8 +230,18 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAir
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   };
-
- 
+  const navigate = useNavigate();
+  const handleBooking = (e) => {
+    const userRole = localStorage.getItem('role'); // Assuming you store user role in session storage
+console.log(userRole,"check role")
+    if (userRole) {
+     
+      navigate(`/FlightBooking/${e._id}`);
+    } else {
+     
+      navigate('/');
+    }
+  };
   return (
     <Style>
       <div className="filters">
@@ -384,9 +395,10 @@ export const Bottom = ({ data, bookData,sorting ,sorthigh,handleRefund,handleAir
               </button> */}
                 {/* <Link to={`/flight-booking/${e._id}`}> */}
                 {/* /FlightBooking/:Id */}
-                <Link to={`/FlightBooking/${e._id}`}>
+                {/* <Link to={`/FlightBooking/${e._id}`}>
               <button onClick={() => bookData(e)}>Book</button>
-            </Link>
+            </Link> */}
+            <button onClick={() => handleBooking(e)}>Book</button>
             </div>
             <div className="div2">
               Travel to India is open for all Indian passport holders, OCI & PIO

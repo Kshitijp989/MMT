@@ -23,6 +23,7 @@ import FlightBookingPage from './component/FlightBooking/FlightBookingPage';
 import UserForm from './component/login/UserForm';
 import Booking from './component/FlightBooking/Booking';
 import Bookings from './component/HotelBooking/Booking';
+import ProtectedRoute from './ProtectedRoute';
 
 
 
@@ -63,24 +64,79 @@ function App() {
             <Route path="/Visa" element={<UnderConstruction />} />
             <Route path="/CahrterFlights" element={<UnderConstruction />} />
             <Route path="/Activities" element={<UnderConstruction />} />
-            <Route path="/Admin/FlightList" element={<FlightsList />} />
-            <Route path="/admin/flight" element={<FlightsList/>}/>
-            <Route path="/admin/hotel" element={<HotelsList/>}/>
+            {/* <Route path="/Admin/FlightList" element={<FlightsList />} /> */}
+            {/* <Route path="/admin/flight" element={<FlightsList/>}/> */}
+            {/* <Route path="/admin/hotel" element={<HotelsList/>}/>
             <Route path="/add-flight" element={<AddFlightForm />} />
-            <Route path="/add-hotel" element={<AddHotelForm />} />
+            <Route path="/add-hotel" element={<AddHotelForm />} /> */}
             <Route path="/Hotelbooking" element={<BookingPage/>}/>
             <Route path="/SignUp" element={<UserForm/>}/>
             <Route path="/FlightBooking/:Id" element={<Booking/>}/>
             <Route path="/HotelBooking/:Id" element={<Bookings/>}/>
             <Route path="/booking" element={<BookingPage/>}/>
 
-            <Route path="/update-flight/:id" element={<UpdateFlightForm />} />
-            <Route path="/admin/update-hotel/:id" element={<UpdateHotelForm />} />
+            {/* <Route path="/update-flight/:id" element={<UpdateFlightForm />} />
+            <Route path="/admin/update-hotel/:id" element={<UpdateHotelForm />} /> */}
             <Route path="/flight-booking/:id" element={<FlightBookingPage />} />
             <Route path="/BookingPage" element={<BookingPage />} />
 
             <Route path="/SignUp" element={<UserForm/>}/>
-
+            <Route
+                path="/Admin/FlightList"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <FlightsList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/flight"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <FlightsList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/hotel"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <HotelsList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/add-flight"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <AddFlightForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/add-hotel"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <AddHotelForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/update-flight/:id"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <UpdateFlightForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/update-hotel/:id"
+                element={
+                  <ProtectedRoute roles={['admin']}>
+                    <UpdateHotelForm />
+                  </ProtectedRoute>
+                }
+              />
           </Routes>
         </div>
       </BrowserRouter>
