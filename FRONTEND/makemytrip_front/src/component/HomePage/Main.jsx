@@ -36,7 +36,14 @@ console.log(from)
   const handlePopup = () => {
     const popup = document.getElementById("popup");
     popup.classList.toggle("active");
-  };
+    
+        // Scroll to a specific position
+      window.scrollTo({
+              top: 101,
+             behavior: 'smooth' // Optional: add smooth scrolling
+           });
+};
+  
   return (
     <div>
       <Header></Header>
