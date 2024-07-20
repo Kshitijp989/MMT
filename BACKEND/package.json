@@ -2,11 +2,11 @@
   "name": "mmt",
   "version": "1.0.0",
   "description": "makemytripclone",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
- 
-
+  "main": "server.js",
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "index.js"
   },
   "author": "kshitij",
   "license": "ISC",

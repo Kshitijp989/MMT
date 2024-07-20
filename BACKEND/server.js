@@ -16,7 +16,7 @@ app.use(express.json({ extended: false }));
 
 //app.use(cors());
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your React app's domain
+    origin: 'https://mmt-react-kshitijs-projects-91931f3e.vercel.app', // Replace with your React app's domain
     credentials: true // Allow cookies for authenticated requests (if applicable)
   }));
 
@@ -33,5 +33,5 @@ app.use('/api', hotelBookingRoutes);
 
 // app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-
-module.exports = start;
+start();
+module.exports = app;
