@@ -2,7 +2,7 @@ import axios from "axios";
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Correct the import
 const Style = styled.div`
   .loginForm {
     display: flex;
@@ -132,7 +132,7 @@ export const LoginForm = (props) => {
     
         if (token) {
           const decoded = jwtDecode(token);
-          setUser(decoded.user);
+          // setUser(decoded.user);
           if (decoded.user.role === "admin") {
             navigate('/Admin/FlightList'); 
           }
