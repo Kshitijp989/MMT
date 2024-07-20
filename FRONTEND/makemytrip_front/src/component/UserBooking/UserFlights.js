@@ -15,7 +15,7 @@ const UserFlights = () => {
 
   const fetchUserFlights = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/userFlights/shitijpatil989@gmail.com');
+      const response = await axios.get('https://mmt-backend-seven.vercel.app/api/userFlights/shitijpatil989@gmail.com');
       if (response.status === 200) {
         setUserFlights(response.data);
       }
