@@ -24,6 +24,7 @@ import UserForm from './component/login/UserForm';
 import Booking from './component/FlightBooking/Booking';
 import Bookings from './component/HotelBooking/Booking';
 import ProtectedRoute from './ProtectedRoute';
+import UserFlights from './component/UserBooking/UserFlights';
 
 
 
@@ -79,7 +80,7 @@ function App() {
             <Route path="/admin/update-hotel/:id" element={<UpdateHotelForm />} /> */}
             <Route path="/flight-booking/:id" element={<FlightBookingPage />} />
             <Route path="/BookingPage" element={<BookingPage />} />
-
+            <Route path="/UserFlights" element={<UserFlights />} />
             <Route path="/SignUp" element={<UserForm/>}/>
             <Route
                 path="/Admin/FlightList"

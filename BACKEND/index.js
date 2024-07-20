@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const hotelBookingRoutes = require('./routes/hotelBookingRoutes');
+const userFlightRoutes = require('./routes/getUserFlightsRoutes');
 dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api/searchFlight', require('./routes/searchFlightRoutes'));
 app.use('/api/searchHotel', require('./routes/searchHotelRoutes'));
 app.use('/api', require('./routes/bookingRoutes'));
 app.use('/api', hotelBookingRoutes);
+app.use('/api', userFlightRoutes);
 // const PORT = process.env.PORT || 5000;
 
 // app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

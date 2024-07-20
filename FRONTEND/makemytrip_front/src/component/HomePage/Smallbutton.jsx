@@ -17,7 +17,7 @@ h4{
     position:relative;
 top: 10px;
 padding-left: 3px;
-
+color:white;
 }
 p{font-size:9px;
 position:relative;
