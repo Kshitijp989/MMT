@@ -59,7 +59,7 @@ export default function UserForm() {
   const handleSubmit = (e) => {
     //e.preventDefault();
     axios
-      .post("http://localhost:5000/api/auth/Register", newUser)
+      .post("https://mmt-backend-seven.vercel.app/api/auth/Register", newUser)
       .then((res) => {
         alert("Signup Success");
         localStorage.setItem("token", res.data.token);
