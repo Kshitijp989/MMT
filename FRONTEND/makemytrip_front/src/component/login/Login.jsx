@@ -5,6 +5,7 @@ import Auth from "../../auth";
 import axios from "axios";
 import styled from 'styled-components'
 import {jwtDecode} from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 const Style = styled.div`
 .loginTrigger {
     width: 30%;
@@ -87,7 +88,9 @@ button{
   
 `
 export const Login = ({ handleClick}) => {
+  
   const [user, setUser] = useState({name:"Traveller"});
+  const navigate = useNavigate(); 
   useEffect(() => {
   const token = localStorage.getItem('token'); // Replace with your token storage method
 
@@ -97,6 +100,8 @@ export const Login = ({ handleClick}) => {
     localStorage.setItem("username", decoded.user.name);
     console.log('username',  localStorage.getItem("username"))
     localStorage.setItem("role", decoded.user.role);
+    console.log("login done")
+
   }
 }, []);
   const logOut = ()=>{

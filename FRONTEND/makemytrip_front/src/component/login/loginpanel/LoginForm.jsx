@@ -1,7 +1,8 @@
 import axios from "axios";
 import styled from "styled-components";
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
+import jwtDecode from 'jwt-decode';
 const Style = styled.div`
   .loginForm {
     display: flex;
@@ -108,7 +109,7 @@ export const LoginForm = (props) => {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate(); 
   const handleChange = (name) => (event) => {
     setValue({ ...value, [name]: event.target.value });
   };
@@ -122,8 +123,22 @@ export const LoginForm = (props) => {
         password: value.password,
       })
       .then((res) => {
+
+        
         alert("Login Success");
         localStorage.setItem("token", res.data.token);
+        const token = localStorage.getItem('token'); 
+
+    
+        if (token) {
+          const decoded = jwtDecode(token);
+          setUser(decoded.user);
+          if (decoded.user.role === "admin") {
+            navigate('/Admin/FlightList'); 
+          }
+   
+
+  }
         console.log(res.data.payLoad)
 
         window.location.reload()
