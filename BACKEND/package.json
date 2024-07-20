@@ -4,9 +4,8 @@
   "description": "makemytripclone",
   "main": "server.js",
  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
-    "start": "server.js"
+    "start": "node api/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kshitij",
   "license": "ISC",
