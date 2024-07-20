@@ -8,7 +8,7 @@ const config = require('../config/config');
 // Register a new user
 exports.register = async (req, res) => {
     const { name, email, password, role } = req.body;
-
+    console.log(req.body)
     try {
         let user = await User.findOne({ email });
         if (user) {

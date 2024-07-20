@@ -59,3 +59,4 @@ exports.cancelBooking = async (req, res) => {
         res.status(500).json({ message: 'Error cancelling booking', error });
     }
 };
+    

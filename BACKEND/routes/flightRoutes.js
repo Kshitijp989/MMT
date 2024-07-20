@@ -1,7 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const adminAuth = require('../middleware/adminAuth');
-const flightController = require('../controller/flightController');
+const adminAuth = require("../middleware/adminAuth");
+const flightController = require("../controller/flightController");
+
 
 router.post('/', adminAuth, flightController.createFlight);
 router.get('/', adminAuth, flightController.getFlights);
