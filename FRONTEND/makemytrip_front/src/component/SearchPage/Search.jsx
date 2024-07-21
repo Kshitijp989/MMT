@@ -94,7 +94,11 @@ export const Search = () => {
   };
 
   const fetchDataByFilter = async () => {
-    try {
+    if(from==""&&departureDate &&travellerClass==""&& returnDate==""&& arrOfAirlines.length<0 && to==""){
+      fetchDataFirst();
+    }else{ try {
+
+      
       const requestBody = {
         from: from,
         to: to,
@@ -120,6 +124,8 @@ export const Search = () => {
       console.error("Error fetching data:", error);
       alert("An error occurred while fetching data");
     }
+  }
+    
   };
   
   useEffect(() => {
