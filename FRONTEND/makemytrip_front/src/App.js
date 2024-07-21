@@ -84,8 +84,25 @@ function App() {
             
             <Route path="/SignUp" element={<UserForm/>}/>
 
-            <Route path="/UserFlights" element={<UserFlights />} />
-            <Route path="/UserHotels" element={<UserHotels />} />
+            {/* <Route path="/UserFlights" element={<UserFlights />} /> */}
+            {/* <Route path="/UserHotels" element={<UserHotels />} /> */}
+
+            <Route
+                path="/UserFlights"
+                element={
+                  <ProtectedRoute roles={['user']}>
+                    <UserFlights />
+                  </ProtectedRoute>
+                }
+              />
+                <Route
+                path="/UserHotels"
+                element={
+                  <ProtectedRoute roles={['user']}>
+                    <UserHotels />
+                  </ProtectedRoute>
+                }
+              />
             <Route
                 path="/Admin/FlightList"
                 element={

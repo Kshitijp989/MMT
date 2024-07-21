@@ -22,6 +22,7 @@ export const Main = () => {
   });
   const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass,apiBaseUrl } = useContext(Statecontext);
   const navigate = useNavigate();
+  const role = localStorage.getItem('role');
   const handleClick = () => {
     navigate('/UserFlights');
   };
@@ -70,15 +71,17 @@ console.log(from)
           <div className="login">
           <Login handleClick={handlePopup}/>
           </div>
-          <Smallbutton onClick={handleClick}>
-            <div className="smallbuttonpic">
-              <BusinessIcon></BusinessIcon>
-            </div>
-            <div>
-              <h4>My Trips</h4>
-              <p>Manage your Bookings</p>
-            </div>
-          </Smallbutton>
+          {role === 'user' && (
+            <Smallbutton onClick={handleClick}>
+              <div className="smallbuttonpic">
+                <BusinessIcon></BusinessIcon>
+              </div>
+              <div>
+                <h4>My Trips</h4>
+                <p>Manage your Bookings</p>
+              </div>
+            </Smallbutton>
+          )}
           <Smallbutton >
             <div className="smallbuttonpic">
               <img
