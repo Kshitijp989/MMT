@@ -9,14 +9,18 @@ const UserFlights = () => {
   const [userFlights, setUserFlights] = useState([]);
   const [error, setError] = useState(null);
   const email=localStorage.getItem("email");
-
+  const { apiBaseUrl } = useContext(Statecontext);
   useEffect(() => {
     fetchUserFlights();
   }, []);
 
   const fetchUserFlights = async () => {
     try {
-      const response = await axios.get(`https://mmt-backend-seven.vercel.app/api/userFlights/${email}`);
+      const response = await axios.get(`${apiBaseUrl}userFlights/${email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       if (response.status === 200) {
         setUserFlights(response.data);
       }
@@ -28,7 +32,11 @@ const UserFlights = () => {
 
   const cancelFlight = async (flightId) => {
     try {
-      await axios.put(`http://localhost:5000/api/userFlights/cancel/${flightId}`);
+      await axios.put(`${apiBaseUrl}userFlights/cancel/${flightId}`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setUserFlights(userFlights.map(flight =>
         flight._id === flightId ? { ...flight, status: 'canceled' } : flight
       ));
