@@ -67,7 +67,7 @@ const BookingForm = (props) => {
         try {
             const response = await axios.post(`${apiBaseUrl}book`, payload, {
                 headers: {
-                    'Authorization': `Bearer ${token}`, // Include the bearer token in the headers
+                    'Authorization': `Bearer ${token}`, 
                 },
             });
             alert('Flight booked successfully!');
