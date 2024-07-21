@@ -14,13 +14,17 @@ import { useContext, useState } from "react";
 import { FareTypes } from "./FareTypes";
 import { Login } from "../login/Login";
 import Statecontext from "../Context/Statecontext";
-
+import { useNavigate } from 'react-router-dom';
 export const Main = () => {
   const [data, setData] = useState({
     from: "",
     to: "",
   });
   const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass,apiBaseUrl } = useContext(Statecontext);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/UserFlights');
+  };
   useState(()=>{
 console.log(from)
   },[from])
@@ -66,7 +70,7 @@ console.log(from)
           <div className="login">
           <Login handleClick={handlePopup}/>
           </div>
-          <Smallbutton>
+          <Smallbutton onClick={handleClick}>
             <div className="smallbuttonpic">
               <BusinessIcon></BusinessIcon>
             </div>
@@ -75,7 +79,7 @@ console.log(from)
               <p>Manage your Bookings</p>
             </div>
           </Smallbutton>
-          <Smallbutton>
+          <Smallbutton >
             <div className="smallbuttonpic">
               <img
                 src="https://imgak.mmtcdn.com/mybiz/assets/images/landing/myBizLogo_light.png"

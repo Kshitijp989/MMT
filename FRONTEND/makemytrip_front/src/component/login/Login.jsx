@@ -100,7 +100,7 @@ export const Login = ({ handleClick}) => {
     localStorage.setItem("username", decoded.user.name);
     console.log('username',  localStorage.getItem("username"))
     localStorage.setItem("role", decoded.user.role);
-    console.log("login done")
+    localStorage.setItem("email", decoded.user.email);
 
   }
 }, []);

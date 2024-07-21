@@ -53,7 +53,7 @@ const UserFlights = () => {
                 <th>Arrival</th>
                 <th>Departure Time</th>
                 <th>Arrival Time</th>
-                <th>Price</th>
+                {/* <th>Price</th> */}
                 <th>Total Price</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -68,7 +68,7 @@ const UserFlights = () => {
                   <td>{flight.flightId.arrival}</td>
                   <td>{new Date(flight.flightId.departureTime).toLocaleString()}</td>
                   <td>{new Date(flight.flightId.arrivalTime).toLocaleString()}</td>
-                  <td>${flight.flightId.price}</td>
+                  {/* <td>${flight.flightId.price}</td> */}
                   <td>${flight.totalPrice}</td>
                   <td>{flight.status === 'booked' ? 'Booked' : 'Canceled'}</td>
                   <td>
