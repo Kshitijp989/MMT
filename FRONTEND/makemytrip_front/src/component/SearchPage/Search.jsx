@@ -47,7 +47,9 @@ export const Search = () => {
       setRefund(e);
       fetchDataByFilter()
     }else{
+      if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
       fetchData();
+      }
     }
   };
   
@@ -130,47 +132,14 @@ export const Search = () => {
         fetchDataFirst();
       }
 
-//    let isMounted = true;
 
-    // if (isMounted) {
-    //   let x = localStorage.getItem("myKey");
-    //   let y = JSON.parse(x);
-      
-    //   // const fetchData = async () => {
-    //   //   try {
-    //   //     const response = await axios.get(`${apiBaseUrl}searchFlight`, {
-    //   //       params: {
-    //   //         from: "Los Angeles (LAX)",
-    //   //         to: "New York (JFK)",
-    //   //         departureDate: "2024-07-15",
-    //   //         flightClass: "Economy",
-    //   //         returnDate: "2024-07-18"
-    //   //       }
-    //   //     });
-    //   //     const ans = response.data.data;
-    //   //     console.log(ans, "check");
-    //   //     if (ans.length === 0) {
-    //   //       alert("No planes are available");
-    //   //     } else {
-    //   //       setData(ans);
-    //   //     }
-    //   //   } catch (error) {
-    //   //     console.error("Error fetching data:", error);
-    //   //     alert("An error occurred while fetching data");
-    //   //   }
-    //   // };
-
-    //   // fetchData();
-    // }
-
-    // return () => {
-    //   isMounted = false;
-    // };
   }, []);
 
   useEffect(()=>{
     console.log("useffect hit of refund")
+    if(refund===true){
     fetchDataByFilter();
+    }
   },[refund])
   const bookData = (e) => {
     localStorage.setItem("buy", JSON.stringify(e));
