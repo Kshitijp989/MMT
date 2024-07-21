@@ -8,6 +8,7 @@ import './UserFlights.css';
 const UserFlights = () => {
   const [userFlights, setUserFlights] = useState([]);
   const [error, setError] = useState(null);
+  const email=localStorage.getItem("email");
 
   useEffect(() => {
     fetchUserFlights();
@@ -15,7 +16,7 @@ const UserFlights = () => {
 
   const fetchUserFlights = async () => {
     try {
-      const response = await axios.get('https://mmt-backend-seven.vercel.app/api/userFlights/shitijpatil989@gmail.com');
+      const response = await axios.get(`https://mmt-backend-seven.vercel.app/api/userFlights/${email}`);
       if (response.status === 200) {
         setUserFlights(response.data);
       }

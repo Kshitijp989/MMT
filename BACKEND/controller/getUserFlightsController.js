@@ -23,6 +23,26 @@ const getUserFlights = async (req, res) => {
     }
   };
   
+  const cancelUserFlight = async (req, res) => {
+    const { flightId } = req.params;
+  
+    try {
+      const booking = await Booking.findById(flightId);
+      if (!booking) {
+        return res.status(404).json({ msg: 'Booking not found' });
+      }
+  
+      booking.status = 'canceled';
+      await booking.save();
+      
+      res.json({ msg: 'Flight canceled successfully' });
+    } catch (error) {
+      console.error(`Error canceling flight: ${error.message}`);
+      res.status(500).send('Server error');
+    }
+  };
+  
   module.exports = {
-    getUserFlights
+    getUserFlights,
+    cancelUserFlight
   };
