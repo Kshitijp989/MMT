@@ -122,12 +122,13 @@ export const Search = () => {
   
   useEffect(() => {
    
-if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
-    fetchData();}
-    else{
-      fetchDataFirst();
-    }
+
     setarrOfAirlines([]);
+    if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
+      fetchData();}
+      else{
+        fetchDataFirst();
+      }
 
 //    let isMounted = true;
 
@@ -181,7 +182,9 @@ if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
   }
   useEffect(()=>{
     console.log(arrOfAirlines,"arr");
-    fetchDataByFilter();
+    if (arrOfAirlines.length > 0) {
+      fetchDataByFilter();
+    }
   },[arrOfAirlines])
   return (
     <>
