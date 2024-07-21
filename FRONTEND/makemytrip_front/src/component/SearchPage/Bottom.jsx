@@ -301,12 +301,16 @@ console.log(userRole,"check role")
       </div>
       <div className="allData">
       {data.length !== 0 ? (
+         data.length > 2 ? (
+          // Render a different message or nothing if there are more than 2 flights
+          <h1>Too many flights to display. Please refine your search criteria.</h1>
+        ) :(
   data.map((e, index) => (
     <h1 key={index} className={index}>
       Flight from {e.departure} to {e.arrival}
     </h1>
   ))
-) : (
+) ): (
   <h1>Please select proper date or no flight must be available on this day</h1>
 )}
 
