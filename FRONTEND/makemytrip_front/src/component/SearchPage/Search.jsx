@@ -78,7 +78,7 @@ export const Search = () => {
   };
   const fetchDataFirst = async () => {
     try {
-      const response = await axios.get(`${apiBaseUrl}all`);
+      const response = await axios.get(`${apiBaseUrl}searchFlight/all`);
       const ans = response.data;
      
      
