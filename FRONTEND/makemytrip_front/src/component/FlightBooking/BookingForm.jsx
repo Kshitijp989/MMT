@@ -71,7 +71,7 @@ const BookingForm = (props) => {
                 },
             });
             alert('Flight booked successfully!');
-            navigate('/');
+            navigate('/UserFlights');
         } catch (error) {
             console.error('Error booking flight:', error);
             alert('Failed to book flight. Please try again.');

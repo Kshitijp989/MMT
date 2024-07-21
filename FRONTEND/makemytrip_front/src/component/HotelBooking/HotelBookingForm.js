@@ -50,7 +50,7 @@ const HotelBookingForm = (props) => {
                 },
             });
             alert('Hotel booked successfully!');
-            navigate('/');
+            navigate('/UserHotels');
         } catch (error) {
             console.error('Error booking hotel:', error);
             alert('Failed to book hotel. Please try again.');
