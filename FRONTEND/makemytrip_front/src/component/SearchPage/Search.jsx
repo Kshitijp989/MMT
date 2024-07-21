@@ -76,7 +76,20 @@ export const Search = () => {
       alert("An error occurred while fetching data");
     }
   };
-
+  const fetchDataFirst = async () => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}all`);
+      const ans = response.data;
+     
+     
+        setData(ans);
+        console.log(ans, "check");
+     
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("An error occurred while fetching data");
+    }
+  };
 
   const fetchDataByFilter = async () => {
     try {
@@ -109,8 +122,11 @@ export const Search = () => {
   
   useEffect(() => {
    
-
-    fetchData();
+if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
+    fetchData();}
+    else{
+      fetchDataFirst();
+    }
     setarrOfAirlines([]);
 
 //    let isMounted = true;

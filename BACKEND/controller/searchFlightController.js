@@ -127,3 +127,12 @@ exports.searchFlightsByPrice = async (req, res) => {
     res.status(500).json({ message: "Error fetching flights", error });
   }
 };
+exports.getAllFlights = async (req, res) => {
+  try {
+    // Fetch all flights from the database
+    const flights = await Flight.find();
+    res.json(flights);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching flights", error });
+  }
+};
