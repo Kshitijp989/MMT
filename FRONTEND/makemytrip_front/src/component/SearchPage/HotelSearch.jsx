@@ -111,6 +111,9 @@ export const HotelSearch = () => {
   };
 
   const fetchDataByFilter = async () => {
+    if (from === "" && to === "" && departureDate === "" && returnDate === "" && travellerClass === "" && arrOfAirlines.length === 0) {
+      fetchDataFirst();
+    } else {
   try {
    
     const requestBody = {
@@ -136,6 +139,7 @@ export const HotelSearch = () => {
     console.error("Error fetching data:", error);
     alert("An error occurred while fetching data");
   }
+}
 }
 const fetchFilteredHotels = async () => {
   try {
