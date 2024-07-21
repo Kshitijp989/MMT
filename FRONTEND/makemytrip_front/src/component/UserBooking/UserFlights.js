@@ -73,8 +73,10 @@ const UserFlights = () => {
                   <td>${flight.totalPrice}</td>
                   <td>{flight.status === 'booked' ? 'Booked' : 'Canceled'}</td>
                   <td>
-                    {flight.status === 'booked' && (
+                  {flight.status === 'booked' ? (
                       <Button variant="danger" onClick={() => cancelFlight(flight._id)}>Cancel</Button>
+                    ) : (
+                      <span style={{ color: 'red', fontWeight: 'bold' }}>Canceled</span>
                     )}
                   </td>
                 </tr>

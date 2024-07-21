@@ -32,9 +32,9 @@ const getUserFlights = async (req, res) => {
         return res.status(404).json({ msg: 'Booking not found' });
       }
   
-      booking.status = 'canceled';
+      booking.status = 'cancelled';  // Corrected enum value
       await booking.save();
-      
+  
       res.json({ msg: 'Flight canceled successfully' });
     } catch (error) {
       console.error(`Error canceling flight: ${error.message}`);
