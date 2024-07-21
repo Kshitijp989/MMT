@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Bookingform.css';
 import axios from 'axios';
 import Statecontext from '../Context/Statecontext';
@@ -8,7 +8,6 @@ const HotelBookingForm = (props) => {
     const [numRooms, setNumRooms] = useState(0);
     const [amount, setAmount] = useState(props.pricePerNight);
     const [totalAmount, setTotalAmount] = useState(props.pricePerNight * 1.18);
-    const emailRef = useRef(null);
     const token = localStorage.getItem('token'); 
     const { apiBaseUrl } = useContext(Statecontext);
     const navigate = useNavigate(); 
@@ -31,8 +30,8 @@ const HotelBookingForm = (props) => {
     };
 
     const handleSubmit = async (e) => {
-        var currentdate = getCurrentDate();
         e.preventDefault();
+        const currentdate = getCurrentDate();
         const payload = {
             hotelId: props._id,
             customerName: localStorage.getItem("username"),
@@ -47,7 +46,7 @@ const HotelBookingForm = (props) => {
         try {
             const response = await axios.post(`${apiBaseUrl}bookHotel`, payload, {
                 headers: {
-                    'Authorization': `Bearer ${token}`, // Include the bearer token in the headers
+                    'Authorization': `Bearer ${token}`,
                 },
             });
             alert('Hotel booked successfully!');
@@ -100,10 +99,6 @@ const HotelBookingForm = (props) => {
                     <div className="col-md-4">
                         <label htmlFor="Amount" className="form-label">Amount</label>
                         <input type="text" className="form-control" id="Amount" value={amount} readOnly />
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="Email" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="Email" ref={emailRef} required />
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="TotalAmount" className="form-label">Total Amount with Tax</label>
