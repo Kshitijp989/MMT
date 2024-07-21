@@ -138,7 +138,11 @@ export const Search = () => {
   useEffect(()=>{
     console.log("useffect hit of refund")
     if(refund===true){
+      console.log('in refund')
     fetchDataByFilter();
+    }
+    else{
+      fetchDataFirst();
     }
   },[refund])
   const bookData = (e) => {
@@ -152,6 +156,7 @@ export const Search = () => {
   useEffect(()=>{
     console.log(arrOfAirlines,"arr");
     if (arrOfAirlines.length > 0) {
+      console.log('in arrof airlines')
       fetchDataByFilter();
     }
   },[arrOfAirlines])
