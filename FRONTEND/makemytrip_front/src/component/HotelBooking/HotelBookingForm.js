@@ -36,7 +36,7 @@ const HotelBookingForm = (props) => {
         const payload = {
             hotelId: props._id,
             customerName: localStorage.getItem("username"),
-            customerEmail: emailRef.current.value,
+            customerEmail: localStorage.getItem("email"),
             numberOfRooms: numRooms,
             bookingDate: currentdate,
             totalPrice: totalAmount,
