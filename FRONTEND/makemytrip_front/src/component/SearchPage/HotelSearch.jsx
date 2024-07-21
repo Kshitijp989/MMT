@@ -76,7 +76,7 @@ export const HotelSearch = () => {
   const HandleBreakfast = (e) => {
     if (e === true) {
       setBreakfast(e);
-      fetchDataByFilter()
+      // fetchDataByFilter()
     }else{
       fetchData();
     }
@@ -110,37 +110,37 @@ export const HotelSearch = () => {
     }
   };
 
-  const fetchDataByFilter = async () => {
-    if (from === "" && to === "" && departureDate === "" && returnDate === "" && travellerClass === "" && arrOfAirlines.length === 0) {
-      fetchDataFirst();
-    } else {
-  try {
+//   const fetchDataByFilter = async () => {
+//     if (from === "" && to === "" && departureDate === "" && returnDate === "" && travellerClass === "" && arrOfAirlines.length === 0) {
+//       fetchDataFirst();
+//     } else {
+//   try {
    
-    const requestBody = {
-      city: location,
-      checkIn: checkIn,
-      checkOut: checkOut,
-      freeWiFi: wifi,
-      complimentaryBreakfast : breakfast,
-      housekeeping : housekeeping,
-      airConditioningHeating : acHeating,
-      Range : range
+//     const requestBody = {
+//       city: location,
+//       checkIn: checkIn,
+//       checkOut: checkOut,
+//       freeWiFi: wifi,
+//       complimentaryBreakfast : breakfast,
+//       housekeeping : housekeeping,
+//       airConditioningHeating : acHeating,
+//       Range : range
 
-    };
-    console.log(requestBody,"requestBody")
-    const response = await axios.post(`${apiBaseUrl}searchFlight/searchFlightsByPrice`, requestBody);
+//     };
+//     console.log(requestBody,"requestBody")
+//     const response = await axios.post(`${apiBaseUrl}searchFlight/searchFlightsByPrice`, requestBody);
 
-    const ans = response.data;
+//     const ans = response.data;
 
-      setData(ans);
-      console.log(ans, "check");
-    // }
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    alert("An error occurred while fetching data");
-  }
-}
-}
+//       setData(ans);
+//       console.log(ans, "check");
+//     // }
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     alert("An error occurred while fetching data");
+//   }
+// }
+// }
 const fetchFilteredHotels = async () => {
   try {
     const params = {
