@@ -50,6 +50,7 @@ const HotelBookingForm = (props) => {
                 },
             });
             alert('Hotel booked successfully!');
+            console.log("before naviage")
             navigate('/UserHotels');
         } catch (error) {
             console.error('Error booking hotel:', error);
