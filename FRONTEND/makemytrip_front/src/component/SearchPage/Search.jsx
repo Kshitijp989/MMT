@@ -59,6 +59,7 @@ export const Search = () => {
   };
 
   const fetchDataByFilter = async () => {
+    console.log(from === "" && to === "" && departureDate === "" && returnDate === "" && travellerClass === "" && arrOfAirlines.length === 0,"check",from === "" ,to ,"" ,departureDate ,"" , returnDate ,"" , travellerClass ,"" , arrOfAirlines.length )
     if (from === "" && to === "" && departureDate === "" && returnDate === "" && travellerClass === "" && arrOfAirlines.length === 0) {
       fetchDataFirst();
     } else {
