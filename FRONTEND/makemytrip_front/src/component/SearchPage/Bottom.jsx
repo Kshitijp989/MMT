@@ -303,7 +303,7 @@ console.log(userRole,"check role")
       {data.length !== 0 ? (
          data.length > 2 ? (
           // Render a different message or nothing if there are more than 2 flights
-          <h1>Too many flights to display. Please refine your search criteria.</h1>
+          <h1></h1>
         ) :(
   data.map((e, index) => (
     <h1 key={index} className={index}>
