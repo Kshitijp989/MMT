@@ -4,89 +4,54 @@ import { Bottom } from "./Bottom";
 import { useState, useEffect, useContext } from "react";
 import Statecontext from "../Context/Statecontext";
 import axios from "axios";
+
 export const Search = () => {
   const [dataa, setData] = useState([]);
   const [refund, setRefund] = useState(false);
-  const [arrOfAirlines,setarrOfAirlines]=useState([]);
-  const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass,apiBaseUrl } = useContext(Statecontext);
-  
+  const [arrOfAirlines, setArrOfAirlines] = useState([]);
+  const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass, apiBaseUrl } = useContext(Statecontext);
+
   const handleSelect = async (select) => {
-   
-   setFrom(select.from);
-   setTo(select.to);
-   setDepartureDate(select.DepartDate);
-   setReturnDate(select.ReturnDate)
-   setTravellerClass(select.TravellerClass)
+    setFrom(select.from);
+    setTo(select.to);
+    setDepartureDate(select.DepartDate);
+    setReturnDate(select.ReturnDate);
+    setTravellerClass(select.TravellerClass);
   };
 
-  useEffect(()=>{
-    fetchData();
-  },[from,to,departureDate,returnDate,travellerClass])
   const handleSort = (e) => {
-    if (e === true) {
-      const sortedList = [...dataa].sort(
-        (a, b) => +a.price - +b.price
-      );
-      setData(sortedList);
-    }
+    const sortedList = [...dataa].sort((a, b) => e ? +a.price - +b.price : +b.price - +a.price);
+    setData(sortedList);
   };
-  const handleHigh = (e) => {
-    if (e === true) {
-      const sortedList = [...dataa].sort(
-        (a, b) => +b.price - +a.price
-      );
-      setData(sortedList);
-    }
-    
-  };
+
   const handleRefund = (e) => {
-    console.log("check e vlaue",e)
-    // setRefund(!refund);
-    if (e === true) {
-      console.log(e,"check return parent")
-      setRefund(e);
-      fetchDataByFilter()
-    }else{
-      if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
-      fetchData();
-      }
-    }
+    setRefund(e);
   };
-  
+
   const fetchData = async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}searchFlight`, {
         params: {
           from: from,
           to: to,
-          departureDate: departureDate,//"2024-07-15",
-          flightClass: travellerClass,//"Economy",
-          returnDate: returnDate,//"2024-07-18"
+          departureDate: departureDate,
+          flightClass: travellerClass,
+          returnDate: returnDate,
         }
       });
-      const ans = response.data;
-     
-      // if (ans.length === 0) {
-      //   alert("No planes are available");
-      // } else {
-
-        setData(ans);
-        console.log(ans, "check");
-      // }
+      setData(response.data);
+      console.log(response.data, "check");
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("An error occurred while fetching data");
     }
   };
+
   const fetchDataFirst = async () => {
     try {
       const response = await axios.get(`${apiBaseUrl}searchFlight/all`);
-      const ans = response.data;
-     
-     
-        setData(ans);
-        console.log(ans, "check");
-     
+      setData(response.data);
+      console.log(response.data, "check");
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("An error occurred while fetching data");
@@ -94,78 +59,60 @@ export const Search = () => {
   };
 
   const fetchDataByFilter = async () => {
-    if(from==""&&departureDate &&travellerClass==""&& returnDate==""&& arrOfAirlines.length<0 && to==""){
+    if (from === "" && to === "" && departureDate === "" && returnDate === "" && travellerClass === "" && arrOfAirlines.length === 0) {
       fetchDataFirst();
-    }else{ try {
+    } else {
+      try {
+        const requestBody = {
+          from: from,
+          to: to,
+          departureDate: departureDate,
+          flightClass: travellerClass,
+          returnDate: returnDate,
+          refundableFares: refund,
+          airlines: arrOfAirlines,
+        };
 
-      
-      const requestBody = {
-        from: from,
-        to: to,
-        departureDate: departureDate, //"2024-07-15",
-        flightClass: travellerClass, //"Economy",
-        returnDate: returnDate, //"2024-07-18",
-        refundableFares: refund,
-        airlines:arrOfAirlines,
-      };
-  
-      const response = await axios.post(`${apiBaseUrl}searchFlight/searchFlightsByPrice`, requestBody);
-  
-      const ans = response.data;
-  
-      // if (ans.length === 0) {
-      //   alert("No planes are available");
-      // } else {
-
-        setData(ans);
-        console.log(ans, "check");
-      // }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      alert("An error occurred while fetching data");
-    }
-  }
-    
-  };
-  
-  useEffect(() => {
-   
-
-    setarrOfAirlines([]);
-    if(from!=""&&to!=""&&departureDate!=""&&returnDate!=""&&travellerClass!=""){
-      fetchData();}
-      else{
-        fetchDataFirst();
+        const response = await axios.post(`${apiBaseUrl}searchFlight/searchFlightsByPrice`, requestBody);
+        setData(response.data);
+        console.log(response.data, "check");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        alert("An error occurred while fetching data");
       }
-
-
-  }, []);
-
-  useEffect(()=>{
-    console.log("useffect hit of refund")
-    if(refund===true){
-      console.log('in refund')
-    fetchDataByFilter();
     }
-    else{
+  };
+
+  useEffect(() => {
+    if (from && to && departureDate && returnDate && travellerClass) {
+      fetchData();
+    } else {
       fetchDataFirst();
     }
-  },[refund])
+  }, [from, to, departureDate, returnDate, travellerClass]);
+
+  useEffect(() => {
+    if (refund) {
+      fetchDataByFilter();
+    } else {
+      fetchDataFirst();
+    }
+  }, [refund]);
+
+  useEffect(() => {
+    if (arrOfAirlines.length > 0) {
+      fetchDataByFilter();
+    }
+  }, [arrOfAirlines]);
+
   const bookData = (e) => {
     localStorage.setItem("buy", JSON.stringify(e));
   };
-  const handleAirlines=(e)=>{
-    console.log(e,"check airline data");
-    setarrOfAirlines(e);
-   
-  }
-  useEffect(()=>{
-    console.log(arrOfAirlines,"arr");
-    if (arrOfAirlines.length > 0) {
-      console.log('in arrof airlines')
-      fetchDataByFilter();
-    }
-  },[arrOfAirlines])
+
+  const handleAirlines = (e) => {
+    setArrOfAirlines(e);
+  };
+
   return (
     <>
       <Header />
@@ -173,7 +120,7 @@ export const Search = () => {
       <Bottom
         data={dataa}
         bookData={bookData}
-        sorthigh={handleHigh}
+        sorthigh={handleSort}
         sorting={handleSort}
         handleRefund={handleRefund}
         handleAirlines={handleAirlines}
