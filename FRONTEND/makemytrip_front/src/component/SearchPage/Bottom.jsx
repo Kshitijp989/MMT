@@ -302,7 +302,7 @@ console.log(userRole,"check role")
       <div className="allData">
       {data.length !== 0 ? (
   data.map((e, index) => (
-    <h1 key={index}>
+    <h1 key={index} className={index}>
       Flight from {e.departure} to {e.arrival}
     </h1>
   ))
