@@ -6,7 +6,7 @@ import Statecontext from "../Context/Statecontext";
 import axios from "axios";
 export const Search = () => {
   const [dataa, setData] = useState([]);
-  const [refund, setRefund] = useState();
+  const [refund, setRefund] = useState(false);
   const [arrOfAirlines,setarrOfAirlines]=useState([]);
   const { from, setFrom, to, setTo, departureDate, setDepartureDate, returnDate, setReturnDate, travellerClass, setTravellerClass,apiBaseUrl } = useContext(Statecontext);
   
