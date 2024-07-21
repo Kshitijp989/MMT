@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Table, Button, Alert } from 'react-bootstrap';
 import NavBar from '../NavBar';
 import backgroundImage from '../../Assets/flight.jpg';
 import './UserFlights.css';
-
+import Statecontext from '../Context/Statecontext';
 const UserFlights = () => {
   const [userFlights, setUserFlights] = useState([]);
   const [error, setError] = useState(null);
   const email=localStorage.getItem("email");
   const { apiBaseUrl } = useContext(Statecontext);
+  const token=localStorage.getItem("token");
   useEffect(() => {
     fetchUserFlights();
   }, []);
