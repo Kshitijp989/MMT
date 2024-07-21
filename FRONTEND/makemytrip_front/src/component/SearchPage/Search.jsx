@@ -76,7 +76,7 @@ export const Search = () => {
 
         const response = await axios.post(`${apiBaseUrl}searchFlight/searchFlightsByPrice`, requestBody);
         setData(response.data);
-        console.log(response.data, "check");
+        console.log(response.data, "check1");
       } catch (error) {
         console.error("Error fetching data:", error);
         alert("An error occurred while fetching data");
