@@ -25,6 +25,7 @@ import Booking from './component/FlightBooking/Booking';
 import Bookings from './component/HotelBooking/Booking';
 import ProtectedRoute from './ProtectedRoute';
 import UserFlights from './component/UserBooking/UserFlights';
+import UserHotels from './component/UserBooking/UserHotels';
 
 
 
@@ -80,8 +81,11 @@ function App() {
             <Route path="/admin/update-hotel/:id" element={<UpdateHotelForm />} /> */}
             <Route path="/flight-booking/:id" element={<FlightBookingPage />} />
             <Route path="/BookingPage" element={<BookingPage />} />
-            <Route path="/UserFlights" element={<UserFlights />} />
+            
             <Route path="/SignUp" element={<UserForm/>}/>
+
+            <Route path="/UserFlights" element={<UserFlights />} />
+            <Route path="/UserHotels" element={<UserHotels />} />
             <Route
                 path="/Admin/FlightList"
                 element={

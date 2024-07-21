@@ -26,6 +26,11 @@ const hotelBookingSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    status: {
+        type: String,
+        enum: ['booked', 'cancelled'],
+        default: 'booked'
+    }
 });
 
 const HotelBooking = mongoose.model('HotelBooking', hotelBookingSchema);
