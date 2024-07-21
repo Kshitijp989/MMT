@@ -49,6 +49,7 @@ const HotelBookingForm = (props) => {
                     'Authorization': `Bearer ${token}`,
                 },
             });
+            console.log("before naviage")
             alert('Hotel booked successfully!');
             console.log("before naviage")
             navigate('/UserHotels');
