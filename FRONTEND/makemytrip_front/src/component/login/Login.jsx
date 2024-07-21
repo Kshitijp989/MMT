@@ -109,6 +109,7 @@ export const Login = ({ handleClick}) => {
 
 
     localStorage.setItem("token", "");
+    localStorage.clear();
     setUser("");
     window.location.reload()
     
