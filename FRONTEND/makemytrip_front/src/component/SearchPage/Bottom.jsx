@@ -311,7 +311,7 @@ console.log(userRole,"check role")
     </h1>
   ))
 ) ): (
-  <h1>Please select proper date or no flight must be available on this day</h1>
+  <h1>Please select proper date or no flight must be available on this days</h1>
 )}
 
 
